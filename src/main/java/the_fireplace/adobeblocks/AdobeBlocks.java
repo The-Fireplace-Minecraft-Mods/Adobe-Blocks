@@ -27,10 +27,12 @@ public class AdobeBlocks {
 	
 	//Items go here
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
+	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		registerItem(adobe_mixture);
+		registerItem(adobe_brick);
 	}
 	
 	@EventHandler
@@ -42,6 +44,7 @@ public class AdobeBlocks {
 	
 	private void registerItemRenders(){
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
 	}
 	
 	private void registerItem(Item item){
