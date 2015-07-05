@@ -36,6 +36,18 @@ public class AdobeWall extends Block {
 	}
 
 	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return this.getDefaultState();
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return 0;
+	}
+
+	@Override
 	public boolean isFullCube()
 	{
 		return false;
