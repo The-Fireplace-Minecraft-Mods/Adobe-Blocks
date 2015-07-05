@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
+import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
@@ -47,6 +48,7 @@ public class AdobeBlocks {
 		registerBlock(adobe_bricks);
 		registerBlock(adobe_furnace);
 		registerBlock(lit_adobe_furnace);
+		registerBlock(adobe_wall);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 	}
@@ -63,6 +65,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID+":adobe_bricks", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID+":adobe_wall", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
