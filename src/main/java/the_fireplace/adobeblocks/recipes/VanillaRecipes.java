@@ -1,11 +1,11 @@
 package the_fireplace.adobeblocks.recipes;
 
-import the_fireplace.adobeblocks.AdobeBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import the_fireplace.adobeblocks.AdobeBlocks;
 
 public class VanillaRecipes {
 	static ItemStack waterStack = new ItemStack(Items.water_bucket);

@@ -1,9 +1,7 @@
 package the_fireplace.adobeblocks.blocks;
 
-import the_fireplace.adobeblocks.AdobeBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
+import the_fireplace.adobeblocks.AdobeBlocks;
 
 public class AdobeBricks extends Block {
 
@@ -12,6 +10,8 @@ public class AdobeBricks extends Block {
 		setHarvestLevel("pickaxe", 0);
 		setUnlocalizedName("adobe_bricks");
 		setCreativeTab(AdobeBlocks.TabAdobeBlocks);
+		setHardness(2.0F);
+		setResistance(10.0F);
+		setStepSound(soundTypePiston);
 	}
-
 }
