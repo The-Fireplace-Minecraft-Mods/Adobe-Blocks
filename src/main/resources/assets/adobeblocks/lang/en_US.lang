@@ -1,4 +1,6 @@
 item.adobe_brick.name=Adobe Brick
 item.adobe_mixture.name=Adobe Mixture
 tile.adobe_bricks.name=Adobe Bricks
+tile.adobe_furnace.name=Adobe Furnace
+tile.lit_adobe_furnace.name=Adobe Furnace
 itemGroup.adobe_blocks=Adobe Blocks

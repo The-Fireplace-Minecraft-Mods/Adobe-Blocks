@@ -12,8 +12,12 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
+import the_fireplace.adobeblocks.blocks.AdobeFurnace;
+import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
+import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
 @Mod(modid=AdobeBlocks.MODID, name=AdobeBlocks.MODNAME, version=AdobeBlocks.VERSION)
@@ -38,7 +42,11 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
+		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
 		registerBlock(adobe_bricks);
+		registerBlock(adobe_furnace);
+		registerBlock(lit_adobe_furnace);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 	}
@@ -53,6 +61,8 @@ public class AdobeBlocks {
 
 	private void registerItemRenders(){
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID+":adobe_bricks", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
