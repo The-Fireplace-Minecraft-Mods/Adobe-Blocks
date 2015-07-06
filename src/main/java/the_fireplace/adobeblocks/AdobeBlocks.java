@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
+import the_fireplace.adobeblocks.blocks.AdobeStairs;
 import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
@@ -36,7 +37,8 @@ public class AdobeBlocks {
 	public static final Block adobe_bricks = new AdobeBricks();
 	public static final Block adobe_furnace = new AdobeFurnace(false).setUnlocalizedName("adobe_furnace").setCreativeTab(TabAdobeBlocks);
 	public static final Block adobe_wall = new AdobeWall();
-	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace");
+	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(13.0F);
+	public static final Block adobe_stairs = new AdobeStairs();
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
@@ -49,6 +51,7 @@ public class AdobeBlocks {
 		registerBlock(adobe_furnace);
 		registerBlock(lit_adobe_furnace);
 		registerBlock(adobe_wall);
+		registerBlock(adobe_stairs);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 	}
@@ -66,6 +69,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID+":adobe_wall", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID+":adobe_stairs", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
