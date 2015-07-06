@@ -12,10 +12,13 @@ public class VanillaRecipes {
 	static ItemStack dirtStack = new ItemStack(Blocks.dirt);
 	static ItemStack sandStack = new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE);
 	static ItemStack furnaceStack = new ItemStack(Blocks.furnace);
+	static ItemStack glassStack = new ItemStack(Blocks.glass);
 
 	static ItemStack adobeBrickStack = new ItemStack(AdobeBlocks.adobe_brick);
 	static ItemStack adobeBricksStack = new ItemStack(AdobeBlocks.adobe_bricks);
 	static ItemStack adobeFurnaceStack = new ItemStack(AdobeBlocks.adobe_furnace);
+	static ItemStack adobeGlassStack = new ItemStack(AdobeBlocks.adobe_glass);
+	static ItemStack adobeGlassStack8 = new ItemStack(AdobeBlocks.adobe_glass, 8);
 	static ItemStack adobeMixStack = new ItemStack(AdobeBlocks.adobe_mixture);
 	static ItemStack adobeMixStack32 = new ItemStack(AdobeBlocks.adobe_mixture, 32);
 	static ItemStack adobeSlabStack = new ItemStack(AdobeBlocks.adobe_slab);
@@ -31,6 +34,7 @@ public class VanillaRecipes {
 		GameRegistry.addRecipe(adobeStairsStack4, "  b", " bb", "bbb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobeStairsStack4, "b  ", "bb ", "bbb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobeSlabStack6, "bbb", 'b', adobeBricksStack);
+		GameRegistry.addRecipe(adobeGlassStack8, "ggg", "gag", "ggg", 'g', glassStack, 'a', adobeMixStack);
 
 		GameRegistry.addSmelting(adobeMixStack, adobeBrickStack, 0.3F);
 	}
