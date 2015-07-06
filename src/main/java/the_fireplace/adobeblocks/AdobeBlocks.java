@@ -7,6 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -25,6 +27,11 @@ import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
+import the_fireplace.adobeblocks.items.AdobeAxe;
+import the_fireplace.adobeblocks.items.AdobeHoe;
+import the_fireplace.adobeblocks.items.AdobePickaxe;
+import the_fireplace.adobeblocks.items.AdobeShovel;
+import the_fireplace.adobeblocks.items.AdobeSword;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
 @Mod(modid=AdobeBlocks.MODID, name=AdobeBlocks.MODNAME, version=AdobeBlocks.VERSION)
@@ -35,6 +42,8 @@ public class AdobeBlocks {
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks";
 	public static final String VERSION = "2.0.0.1";
+
+	public static ToolMaterial adobeTool = EnumHelper.addToolMaterial("adobe", 1, 177, 2.0F, 1.0F, 15);
 
 	public static final CreativeTabs TabAdobeBlocks = new TabAdobeBlocks("adobe_blocks");
 	public static final Material adobe = new Material(MapColor.adobeColor);
@@ -49,6 +58,12 @@ public class AdobeBlocks {
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
+	public static final Item stone_stick = new Item().setUnlocalizedName("stone_stick").setCreativeTab(TabAdobeBlocks);
+	public static final Item adobe_sword = new AdobeSword();
+	public static final Item adobe_pickaxe = new AdobePickaxe();
+	public static final Item adobe_axe = new AdobeAxe();
+	public static final Item adobe_shovel = new AdobeShovel();
+	public static final Item adobe_hoe = new AdobeHoe();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
@@ -66,6 +81,12 @@ public class AdobeBlocks {
 		registerBlock(adobe_glass);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
+		registerItem(adobe_sword);
+		registerItem(adobe_pickaxe);
+		registerItem(adobe_axe);
+		registerItem(adobe_shovel);
+		registerItem(adobe_hoe);
+		registerItem(stone_stick);
 	}
 
 	@EventHandler
@@ -87,6 +108,12 @@ public class AdobeBlocks {
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_sword, 0, new ModelResourceLocation(MODID+":adobe_sword", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_pickaxe, 0, new ModelResourceLocation(MODID+":adobe_pickaxe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_axe, 0, new ModelResourceLocation(MODID+":adobe_axe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_shovel, 0, new ModelResourceLocation(MODID+":adobe_shovel", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID+":adobe_hoe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID+":stone_stick", "inventory"));
 	}
 
 	private void registerItem(Item item){

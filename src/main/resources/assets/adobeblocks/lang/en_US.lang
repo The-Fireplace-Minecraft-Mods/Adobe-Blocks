@@ -1,5 +1,11 @@
 item.adobe_brick.name=Adobe Brick
 item.adobe_mixture.name=Adobe Mixture
+item.adobe_sword.name=Adobe Sword
+item.adobe_hoe.name=Adobe Hoe
+item.adobe_pickaxe.name=Adobe Pickaxe
+item.adobe_axe.name=Adobe Axe
+item.adobe_shovel.name=Adobe Shovel
+item.stone_stick.name=Stone Stick
 tile.adobe_bricks.name=Adobe Bricks
 tile.adobe_furnace.name=Adobe Furnace
 tile.lit_adobe_furnace.name=Adobe Furnace

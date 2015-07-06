@@ -13,6 +13,7 @@ public class VanillaRecipes {
 	static ItemStack sandStack = new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE);
 	static ItemStack furnaceStack = new ItemStack(Blocks.furnace);
 	static ItemStack glassStack = new ItemStack(Blocks.glass);
+	static ItemStack stoneStack = new ItemStack(Blocks.stone);
 
 	static ItemStack adobeBrickStack = new ItemStack(AdobeBlocks.adobe_brick);
 	static ItemStack adobeBricksStack = new ItemStack(AdobeBlocks.adobe_bricks);
@@ -25,6 +26,13 @@ public class VanillaRecipes {
 	static ItemStack adobeSlabStack6 = new ItemStack(AdobeBlocks.adobe_slab, 6);
 	static ItemStack adobeStairsStack4 = new ItemStack(AdobeBlocks.adobe_stairs, 4);
 	static ItemStack adobeWallStack6 = new ItemStack(AdobeBlocks.adobe_wall, 6);
+	static ItemStack stoneStickStack = new ItemStack(AdobeBlocks.stone_stick);
+	static ItemStack stoneStickStack4 = new ItemStack(AdobeBlocks.stone_stick, 6);
+	static ItemStack adobeSwordStack = new ItemStack(AdobeBlocks.adobe_sword);
+	static ItemStack adobeAxeStack = new ItemStack(AdobeBlocks.adobe_axe);
+	static ItemStack adobePickaxeStack = new ItemStack(AdobeBlocks.adobe_pickaxe);
+	static ItemStack adobeShovelStack = new ItemStack(AdobeBlocks.adobe_shovel);
+	static ItemStack adobeHoeStack = new ItemStack(AdobeBlocks.adobe_hoe);
 
 	public static void initRecipes(){
 		GameRegistry.addShapelessRecipe(adobeMixStack32, waterStack, dirtStack, dirtStack, dirtStack, dirtStack, sandStack, sandStack, sandStack, sandStack);
@@ -35,6 +43,14 @@ public class VanillaRecipes {
 		GameRegistry.addRecipe(adobeStairsStack4, "b  ", "bb ", "bbb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobeSlabStack6, "bbb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobeGlassStack8, "ggg", "gag", "ggg", 'g', glassStack, 'a', adobeMixStack);
+		GameRegistry.addRecipe(stoneStickStack4, "s", "s", 's', stoneStack);
+		GameRegistry.addRecipe(adobeSwordStack, "a", "a", "s", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobePickaxeStack, "aaa", " s ", " s ", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobeShovelStack, "a", "s", "s", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobeAxeStack, "aa", "sa", "s ", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobeAxeStack, "aa", "as", " s", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobeHoeStack, "aa", "s ", "s ", 'a', adobeBrickStack, 's', stoneStickStack);
+		GameRegistry.addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneStickStack);
 
 		GameRegistry.addSmelting(adobeMixStack, adobeBrickStack, 0.3F);
 	}
