@@ -41,7 +41,7 @@ public class AdobeBlocks {
 	public static final Block adobe_bricks = new AdobeBricks();
 	public static final Block adobe_furnace = new AdobeFurnace(false).setUnlocalizedName("adobe_furnace").setCreativeTab(TabAdobeBlocks);
 	public static final Block adobe_wall = new AdobeWall();
-	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(13.0F);
+	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(0.875F);
 	public static final Block adobe_stairs = new AdobeStairs();
 	public static final Block adobe_slab = new AdobeHalfSlab();
 
