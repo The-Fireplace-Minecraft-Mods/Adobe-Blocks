@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=false": { "model": "adobeblocks:adobe_slab" },
+        "half=top,variant=false": { "model": "adobeblocks:upper_adobe_slab" }
+    }
+}

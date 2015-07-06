@@ -15,9 +15,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
+import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
+import the_fireplace.adobeblocks.blocks.AdobeHalfSlab;
+import the_fireplace.adobeblocks.blocks.AdobeSlab;
 import the_fireplace.adobeblocks.blocks.AdobeStairs;
 import the_fireplace.adobeblocks.blocks.AdobeWall;
+import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
@@ -39,14 +43,19 @@ public class AdobeBlocks {
 	public static final Block adobe_wall = new AdobeWall();
 	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(13.0F);
 	public static final Block adobe_stairs = new AdobeStairs();
+	public static final Block adobe_slab = new AdobeHalfSlab();
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		AdobeSlab doubleSlab = new AdobeDoubleSlab();
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
+		GameRegistry.registerBlock(adobe_slab, ItemBlockAdobeSlab.class, "adobe_slab", adobe_slab, doubleSlab, false);
+		GameRegistry.registerBlock(doubleSlab, ItemBlockAdobeSlab.class, "double_adobe_slab", adobe_slab, doubleSlab, true);
 		registerBlock(adobe_bricks);
 		registerBlock(adobe_furnace);
 		registerBlock(lit_adobe_furnace);
@@ -70,6 +79,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID+":adobe_wall", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID+":adobe_stairs", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID+":adobe_slab", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));

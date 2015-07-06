@@ -5,4 +5,5 @@ tile.adobe_furnace.name=Adobe Furnace
 tile.lit_adobe_furnace.name=Adobe Furnace
 tile.adobe_wall.name=Adobe Wall
 tile.adobe_stairs.name=Adobe Stairs
+tile.adobe_slab.name=Adobe Slab
 itemGroup.adobe_blocks=Adobe Blocks

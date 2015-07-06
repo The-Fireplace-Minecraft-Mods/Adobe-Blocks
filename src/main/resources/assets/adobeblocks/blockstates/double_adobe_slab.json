@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "variant=false": { "model": "adobeblocks:adobe_bricks" },
+        "variant=true": { "model": "adobeblocks:adobe_bricks" }
+    }
+}
