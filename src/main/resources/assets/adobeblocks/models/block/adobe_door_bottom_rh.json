@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "adobeblocks:blocks/adobe_door_lower",
+        "top": "adobeblocks:blocks/adobe_door_upper"
+    }
+}

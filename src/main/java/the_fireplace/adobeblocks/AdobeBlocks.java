@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
+import the_fireplace.adobeblocks.blocks.AdobeDoor;
 import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.blocks.AdobeGlass;
@@ -32,6 +33,7 @@ import the_fireplace.adobeblocks.items.AdobeHoe;
 import the_fireplace.adobeblocks.items.AdobePickaxe;
 import the_fireplace.adobeblocks.items.AdobeShovel;
 import the_fireplace.adobeblocks.items.AdobeSword;
+import the_fireplace.adobeblocks.items.ItemAdobeDoor;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
 @Mod(modid=AdobeBlocks.MODID, name=AdobeBlocks.MODNAME, version=AdobeBlocks.VERSION)
@@ -55,10 +57,12 @@ public class AdobeBlocks {
 	public static final Block adobe_stairs = new AdobeStairs();
 	public static final Block adobe_slab = new AdobeHalfSlab();
 	public static final Block adobe_glass = new AdobeGlass();
+	public static final Block adobe_door_internal = new AdobeDoor();
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
 	public static final Item stone_stick = new Item().setUnlocalizedName("stone_stick").setCreativeTab(TabAdobeBlocks);
+	public static final Item adobe_door = new ItemAdobeDoor(adobe_door_internal);
 	public static final Item adobe_sword = new AdobeSword();
 	public static final Item adobe_pickaxe = new AdobePickaxe();
 	public static final Item adobe_axe = new AdobeAxe();
@@ -79,6 +83,7 @@ public class AdobeBlocks {
 		registerBlock(adobe_wall);
 		registerBlock(adobe_stairs);
 		registerBlock(adobe_glass);
+		registerBlock(adobe_door_internal);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 		registerItem(adobe_sword);
@@ -87,6 +92,7 @@ public class AdobeBlocks {
 		registerItem(adobe_shovel);
 		registerItem(adobe_hoe);
 		registerItem(stone_stick);
+		registerItem(adobe_door);
 	}
 
 	@EventHandler
@@ -114,6 +120,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_shovel, 0, new ModelResourceLocation(MODID+":adobe_shovel", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID+":adobe_hoe", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID+":stone_stick", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID+":adobe_door", "inventory"));
 	}
 
 	private void registerItem(Item item){
