@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -31,6 +32,9 @@ import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
+import the_fireplace.adobeblocks.firecorecompat.FCCompat;
+import the_fireplace.adobeblocks.firecorecompat.FCCompatDummy;
+import the_fireplace.adobeblocks.firecorecompat.IFCCompat;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.items.AdobeAxe;
 import the_fireplace.adobeblocks.items.AdobeHoe;
@@ -49,7 +53,8 @@ public class AdobeBlocks {
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks";
-	public static final String VERSION = "2.0.0.1";
+	public static final String VERSION = "2.0.1.0";
+	public static final String downloadURL = "http://goo.gl/lT6oNC";
 
 	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -109,7 +114,13 @@ public class AdobeBlocks {
 
 		int eid=0;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
-		//TODO Version Checker Code here
+		IFCCompat compat;
+		if(Loader.isModLoaded("fireplacecore")){
+			compat = new FCCompat();
+		}else{
+			compat = new FCCompatDummy();
+		}
+		compat.register();
 	}
 
 	@EventHandler
