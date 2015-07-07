@@ -15,6 +15,8 @@ public class AdobeGlass extends Block {
 		setUnlocalizedName("adobe_glass");
 		setHardness(0.3F);
 		setStepSound(soundTypeGlass);
+		setCreativeTab(AdobeBlocks.TabAdobeBlocks);
+		this.useNeighborBrightness = true;
 	}
 	@Override
 	public int quantityDropped(Random random)
@@ -36,5 +38,9 @@ public class AdobeGlass extends Block {
 	protected boolean canSilkHarvest()
 	{
 		return true;
+	}
+	@Override
+	public boolean isOpaqueCube(){
+		return false;
 	}
 }
