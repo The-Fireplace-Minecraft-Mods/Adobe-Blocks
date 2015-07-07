@@ -22,6 +22,7 @@ import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.blocks.AdobeGlass;
 import the_fireplace.adobeblocks.blocks.AdobeHalfSlab;
+import the_fireplace.adobeblocks.blocks.AdobePane;
 import the_fireplace.adobeblocks.blocks.AdobeSlab;
 import the_fireplace.adobeblocks.blocks.AdobeStairs;
 import the_fireplace.adobeblocks.blocks.AdobeWall;
@@ -58,6 +59,7 @@ public class AdobeBlocks {
 	public static final Block adobe_slab = new AdobeHalfSlab();
 	public static final Block adobe_glass = new AdobeGlass();
 	public static final Block adobe_door_internal = new AdobeDoor();
+	public static final Block adobe_glass_pane = new AdobePane(false).setUnlocalizedName("adobe_glass_pane").setHardness(0.3F).setStepSound(Block.soundTypeGlass);
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
@@ -84,6 +86,7 @@ public class AdobeBlocks {
 		registerBlock(adobe_stairs);
 		registerBlock(adobe_glass);
 		registerBlock(adobe_door_internal);
+		registerBlock(adobe_glass_pane);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 		registerItem(adobe_sword);
@@ -111,6 +114,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID+":adobe_stairs", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID+":adobe_slab", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID+":adobe_glass", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID+":adobe_glass_pane", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));

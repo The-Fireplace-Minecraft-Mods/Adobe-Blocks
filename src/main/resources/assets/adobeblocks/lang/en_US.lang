@@ -15,4 +15,5 @@ tile.adobe_wall.name=Adobe Wall
 tile.adobe_stairs.name=Adobe Stairs
 tile.adobe_slab.name=Adobe Slab
 tile.adobe_glass.name=Adobe Glass
+tile.adobe_glass_pane.name=Adobe Glass Pane
 itemGroup.adobe_blocks=Adobe Blocks

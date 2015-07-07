@@ -22,6 +22,7 @@ public class VanillaRecipes {
 	static ItemStack adobeFurnaceStack = new ItemStack(AdobeBlocks.adobe_furnace);
 	static ItemStack adobeGlassStack = new ItemStack(AdobeBlocks.adobe_glass);
 	static ItemStack adobeGlassStack8 = new ItemStack(AdobeBlocks.adobe_glass, 8);
+	static ItemStack adobePaneStack16 = new ItemStack(AdobeBlocks.adobe_glass_pane, 16);
 	static ItemStack adobeMixStack = new ItemStack(AdobeBlocks.adobe_mixture);
 	static ItemStack adobeMixStack32 = new ItemStack(AdobeBlocks.adobe_mixture, 32);
 	static ItemStack adobeSlabStack = new ItemStack(AdobeBlocks.adobe_slab);
@@ -54,6 +55,7 @@ public class VanillaRecipes {
 		GameRegistry.addRecipe(adobeHoeStack, "aa", "s ", "s ", 'a', adobeBrickStack, 's', stoneStickStack);
 		GameRegistry.addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneStickStack);
 		GameRegistry.addRecipe(adobeDoorStack3, "bb", "bb", "bb", 'b', adobeBricksStack);
+		GameRegistry.addRecipe(adobePaneStack16, "ggg", "ggg", 'g', adobeGlassStack);
 
 		GameRegistry.addSmelting(adobeMixStack, adobeBrickStack, 0.3F);
 	}
