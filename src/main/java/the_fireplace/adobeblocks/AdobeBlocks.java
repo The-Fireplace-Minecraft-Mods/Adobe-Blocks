@@ -12,9 +12,11 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import the_fireplace.adobeblocks.blocks.AdobeBricks;
 import the_fireplace.adobeblocks.blocks.AdobeDoor;
@@ -27,6 +29,7 @@ import the_fireplace.adobeblocks.blocks.AdobeSlab;
 import the_fireplace.adobeblocks.blocks.AdobeStairs;
 import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
+import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.items.AdobeAxe;
@@ -35,6 +38,8 @@ import the_fireplace.adobeblocks.items.AdobePickaxe;
 import the_fireplace.adobeblocks.items.AdobeShovel;
 import the_fireplace.adobeblocks.items.AdobeSword;
 import the_fireplace.adobeblocks.items.ItemAdobeDoor;
+import the_fireplace.adobeblocks.items.ThrowingStone;
+import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
 @Mod(modid=AdobeBlocks.MODID, name=AdobeBlocks.MODNAME, version=AdobeBlocks.VERSION)
@@ -45,6 +50,9 @@ public class AdobeBlocks {
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks";
 	public static final String VERSION = "2.0.0.1";
+
+	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
+	public static CommonProxy proxy;
 
 	public static ToolMaterial adobeTool = EnumHelper.addToolMaterial("adobe", 1, 177, 2.0F, 1.0F, 15);
 
@@ -70,6 +78,7 @@ public class AdobeBlocks {
 	public static final Item adobe_axe = new AdobeAxe();
 	public static final Item adobe_shovel = new AdobeShovel();
 	public static final Item adobe_hoe = new AdobeHoe();
+	public static final Item throwing_stone = new ThrowingStone();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
@@ -96,11 +105,17 @@ public class AdobeBlocks {
 		registerItem(adobe_hoe);
 		registerItem(stone_stick);
 		registerItem(adobe_door);
+		registerItem(throwing_stone);
+
+		int eid=0;
+		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
+		//TODO Version Checker Code here
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event){
 		VanillaRecipes.initRecipes();
+		proxy.registerRenderers();
 		if(event.getSide().isClient()){
 			registerItemRenders();
 		}
@@ -125,6 +140,7 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID+":adobe_hoe", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID+":stone_stick", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID+":adobe_door", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(throwing_stone, 0, new ModelResourceLocation(MODID+":adobe_throwing_stone", "inventory"));
 	}
 
 	private void registerItem(Item item){
