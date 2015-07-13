@@ -53,7 +53,7 @@ public class AdobeBlocks {
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks";
-	public static final String VERSION = "2.0.1.0";
+	public static final String VERSION = "2.0.2.0";
 	public static final String downloadURL = "http://goo.gl/lT6oNC";
 
 	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
