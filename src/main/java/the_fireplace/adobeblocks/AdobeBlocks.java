@@ -32,9 +32,9 @@ import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
-import the_fireplace.adobeblocks.firecorecompat.FCCompat;
-import the_fireplace.adobeblocks.firecorecompat.FCCompatDummy;
-import the_fireplace.adobeblocks.firecorecompat.IFCCompat;
+import the_fireplace.adobeblocks.fulcrumcompat.FulcrumCompat;
+import the_fireplace.adobeblocks.fulcrumcompat.FulcrumCompatDummy;
+import the_fireplace.adobeblocks.fulcrumcompat.IFulcrumCompat;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.items.AdobeAxe;
 import the_fireplace.adobeblocks.items.AdobeHoe;
@@ -53,7 +53,7 @@ public class AdobeBlocks {
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks";
-	public static final String VERSION = "2.0.2.0";
+	public static final String VERSION = "2.0.3.0";
 	public static final String downloadURL = "http://goo.gl/lT6oNC";
 
 	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
@@ -114,11 +114,11 @@ public class AdobeBlocks {
 
 		int eid=0;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
-		IFCCompat compat;
-		if(Loader.isModLoaded("fireplacecore")){
-			compat = new FCCompat();
+		IFulcrumCompat compat;
+		if(Loader.isModLoaded("fulcrum")){
+			compat = new FulcrumCompat();
 		}else{
-			compat = new FCCompatDummy();
+			compat = new FulcrumCompatDummy();
 		}
 		compat.register();
 	}

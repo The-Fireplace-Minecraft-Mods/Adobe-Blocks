@@ -3,7 +3,7 @@
   "modid": "adobeblocks",
   "name": "Adobe Blocks",
   "description": "Adds adobe blocks and other stuff of adobe",
-  "version": "2.0.2.0",
+  "version": "2.0.3.0",
   "mcversion": "1.8",
   "url": "http://goo.gl/lT6oNC",
   "updateUrl": "http://goo.gl/lT6oNC",
@@ -11,7 +11,7 @@
   "credits": "Authored by The_Fireplace, Original Mod and current textures by BaneSavage",
   "logoFile": "logo.png",
   "screenshots": [],
-  "dependencies": ["fireplacecore"],
+  "dependencies": ["fulcrum"],
   "requiredMods": ["Forge@[11.14.1.*,)"],
   "dependants": [],
   "useDependencyInformation": true

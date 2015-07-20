@@ -1,6 +1,6 @@
-package the_fireplace.adobeblocks.firecorecompat;
+package the_fireplace.adobeblocks.fulcrumcompat;
 
-public class FCCompatDummy implements IFCCompat {
+public class FulcrumCompatDummy implements IFulcrumCompat {
 
 	@Override
 	public void register() {
