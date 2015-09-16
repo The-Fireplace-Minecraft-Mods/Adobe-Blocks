@@ -9,7 +9,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -25,16 +24,15 @@ import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.blocks.AdobeGlass;
 import the_fireplace.adobeblocks.blocks.AdobeHalfSlab;
+import the_fireplace.adobeblocks.blocks.AdobeMixtureBlock;
 import the_fireplace.adobeblocks.blocks.AdobePane;
 import the_fireplace.adobeblocks.blocks.AdobeSlab;
 import the_fireplace.adobeblocks.blocks.AdobeStairs;
+import the_fireplace.adobeblocks.blocks.AdobeTile;
 import the_fireplace.adobeblocks.blocks.AdobeWall;
 import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
-import the_fireplace.adobeblocks.fulcrumcompat.FulcrumCompat;
-import the_fireplace.adobeblocks.fulcrumcompat.FulcrumCompatDummy;
-import the_fireplace.adobeblocks.fulcrumcompat.IFulcrumCompat;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.items.AdobeAxe;
 import the_fireplace.adobeblocks.items.AdobeHoe;
@@ -52,9 +50,9 @@ public class AdobeBlocks {
 	public static AdobeBlocks instance;
 
 	public static final String MODID = "adobeblocks";
-	public static final String MODNAME = "Adobe Blocks";
-	public static final String VERSION = "2.0.3.0";
-	public static final String downloadURL = "http://goo.gl/lT6oNC";
+	public static final String MODNAME = "Adobe Blocks 2";
+	public static final String VERSION = "2.1.1.0";
+	public static final String downloadURL = "http://goo.gl/bYlW4b";
 
 	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -64,6 +62,8 @@ public class AdobeBlocks {
 	public static final CreativeTabs TabAdobeBlocks = new TabAdobeBlocks("adobe_blocks");
 	public static final Material adobe = new Material(MapColor.adobeColor);
 
+	public static final Block adobe_mixture_block = new AdobeMixtureBlock();
+	public static final Block adobe_tile = new AdobeTile();
 	public static final Block adobe_bricks = new AdobeBricks();
 	public static final Block adobe_furnace = new AdobeFurnace(false).setUnlocalizedName("adobe_furnace").setCreativeTab(TabAdobeBlocks);
 	public static final Block adobe_wall = new AdobeWall();
@@ -93,6 +93,8 @@ public class AdobeBlocks {
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
 		GameRegistry.registerBlock(adobe_slab, ItemBlockAdobeSlab.class, "adobe_slab", adobe_slab, doubleSlab, false);
 		GameRegistry.registerBlock(doubleSlab, ItemBlockAdobeSlab.class, "double_adobe_slab", adobe_slab, doubleSlab, true);
+		registerBlock(adobe_mixture_block);
+		registerBlock(adobe_tile);
 		registerBlock(adobe_bricks);
 		registerBlock(adobe_furnace);
 		registerBlock(lit_adobe_furnace);
@@ -114,13 +116,6 @@ public class AdobeBlocks {
 
 		int eid=0;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
-		IFulcrumCompat compat;
-		if(Loader.isModLoaded("fulcrum")){
-			compat = new FulcrumCompat();
-		}else{
-			compat = new FulcrumCompatDummy();
-		}
-		compat.register();
 	}
 
 	@EventHandler
@@ -133,6 +128,8 @@ public class AdobeBlocks {
 	}
 
 	private void registerItemRenders(){
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID+":adobe_mixture_block", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID+":adobe_tile", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID+":adobe_bricks", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
@@ -161,4 +158,5 @@ public class AdobeBlocks {
 	private void registerBlock(Block block){
 		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
+	public static final String LATEST = "https://dl.dropboxusercontent.com/s/8sdl3cynu7345k4/release.version?dl=0";
 }
