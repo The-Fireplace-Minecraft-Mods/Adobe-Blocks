@@ -36,7 +36,15 @@ minecraft {
     mappings = "snapshot_20141130"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
-
+task deobfJar(type: Jar) { // Generate deobfuscated
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+tasks.build.dependsOn('deobfJar')
+artifacts {
+    archives deobfJar
+    archives jar
+}
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
