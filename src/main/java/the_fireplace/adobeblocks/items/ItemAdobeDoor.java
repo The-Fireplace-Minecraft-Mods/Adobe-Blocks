@@ -14,8 +14,7 @@ import the_fireplace.adobeblocks.AdobeBlocks;
 public class ItemAdobeDoor extends Item {
 	private Block block;
 
-	public ItemAdobeDoor(Block block)
-	{
+	public ItemAdobeDoor(Block block) {
 		this.block = block;
 		setUnlocalizedName("adobe_door_item");
 		setCreativeTab(AdobeBlocks.TabAdobeBlocks);
@@ -24,36 +23,26 @@ public class ItemAdobeDoor extends Item {
 	/**
 	 * Called when a Block is right-clicked with this Item
 	 *
-	 * @param pos The block being right-clicked
+	 * @param pos  The block being right-clicked
 	 * @param side The side being right-clicked
 	 */
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (side != EnumFacing.UP)
-		{
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (side != EnumFacing.UP) {
 			return false;
-		}
-		else
-		{
+		} else {
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 			Block block = iblockstate.getBlock();
 
-			if (!block.isReplaceable(worldIn, pos))
-			{
+			if (!block.isReplaceable(worldIn, pos)) {
 				pos = pos.offset(side);
 			}
 
-			if (!playerIn.canPlayerEdit(pos, side, stack))
-			{
+			if (!playerIn.canPlayerEdit(pos, side, stack)) {
 				return false;
-			}
-			else if (!this.block.canPlaceBlockAt(worldIn, pos))
-			{
+			} else if (!this.block.canPlaceBlockAt(worldIn, pos)) {
 				return false;
-			}
-			else
-			{
+			} else {
 				placeDoor(worldIn, pos, EnumFacing.fromAngle(playerIn.rotationYaw), this.block);
 				--stack.stackSize;
 				return true;
@@ -61,8 +50,7 @@ public class ItemAdobeDoor extends Item {
 		}
 	}
 
-	public static void placeDoor(World worldIn, BlockPos pos, EnumFacing facing, Block door)
-	{
+	public static void placeDoor(World worldIn, BlockPos pos, EnumFacing facing, Block door) {
 		BlockPos blockpos1 = pos.offset(facing.rotateY());
 		BlockPos blockpos2 = pos.offset(facing.rotateYCCW());
 		int i = (worldIn.getBlockState(blockpos2).getBlock().isNormalCube() ? 1 : 0) + (worldIn.getBlockState(blockpos2.up()).getBlock().isNormalCube() ? 1 : 0);
@@ -71,8 +59,7 @@ public class ItemAdobeDoor extends Item {
 		boolean flag1 = worldIn.getBlockState(blockpos1).getBlock() == door || worldIn.getBlockState(blockpos1.up()).getBlock() == door;
 		boolean flag2 = false;
 
-		if (flag && !flag1 || j > i)
-		{
+		if (flag && !flag1 || j > i) {
 			flag2 = true;
 		}
 

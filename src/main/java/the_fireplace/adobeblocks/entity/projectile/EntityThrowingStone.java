@@ -8,18 +8,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityThrowingStone extends EntityThrowable {
-	public EntityThrowingStone(World worldIn)
-	{
+	public EntityThrowingStone(World worldIn) {
 		super(worldIn);
 	}
 
-	public EntityThrowingStone(World worldIn, EntityLivingBase entity)
-	{
+	public EntityThrowingStone(World worldIn, EntityLivingBase entity) {
 		super(worldIn, entity);
 	}
 
-	public EntityThrowingStone(World worldIn, double x, double y, double z)
-	{
+	public EntityThrowingStone(World worldIn, double x, double y, double z) {
 		super(worldIn, x, y, z);
 	}
 
@@ -27,22 +24,18 @@ public class EntityThrowingStone extends EntityThrowable {
 	 * Called when this EntityThrowable hits a block or entity.
 	 */
 	@Override
-	protected void onImpact(MovingObjectPosition mop)
-	{
-		if (mop.entityHit != null)
-		{
+	protected void onImpact(MovingObjectPosition mop) {
+		if (mop.entityHit != null) {
 			byte b0 = 2;
 
-			if (mop.entityHit instanceof EntitySkeleton)
-			{
+			if (mop.entityHit instanceof EntitySkeleton) {
 				b0 = 3;
 			}
 
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), b0);
 		}
 
-		if (!this.worldObj.isRemote)
-		{
+		if (!this.worldObj.isRemote) {
 			this.setDead();
 		}
 	}

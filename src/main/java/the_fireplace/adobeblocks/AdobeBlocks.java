@@ -46,7 +46,7 @@ import the_fireplace.adobeblocks.items.ThrowingStone;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
-@Mod(modid=AdobeBlocks.MODID, name=AdobeBlocks.MODNAME, version=AdobeBlocks.VERSION)
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, version = AdobeBlocks.VERSION)
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
@@ -56,7 +56,7 @@ public class AdobeBlocks {
 	public static final String VERSION = "2.1.1.0";
 	public static final String downloadURL = "http://goo.gl/bYlW4b";
 
-	@SidedProxy(clientSide="the_fireplace.adobeblocks.proxy.ClientProxy", serverSide="the_fireplace.adobeblocks.proxy.CommonProxy")
+	@SidedProxy(clientSide = "the_fireplace.adobeblocks.proxy.ClientProxy", serverSide = "the_fireplace.adobeblocks.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static ToolMaterial adobeTool = EnumHelper.addToolMaterial("adobe", 1, 177, 2.0F, 1.0F, 15);
@@ -88,7 +88,7 @@ public class AdobeBlocks {
 	public static final Item throwing_stone = new ThrowingStone();
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event){
+	public void preInit(FMLPreInitializationEvent event) {
 		AdobeSlab doubleSlab = new AdobeDoubleSlab();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
@@ -116,50 +116,51 @@ public class AdobeBlocks {
 		registerItem(adobe_door);
 		registerItem(throwing_stone);
 
-		int eid=0;
+		int eid = 0;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event){
+	public void init(FMLInitializationEvent event) {
 		BlockDispenser.dispenseBehaviorRegistry.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
 		proxy.registerRenderers();
-		if(event.getSide().isClient()){
+		if (event.getSide().isClient()) {
 			registerItemRenders();
 		}
 	}
 
-	private void registerItemRenders(){
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID+":adobe_mixture_block", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID+":adobe_tile", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID+":adobe_bricks", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID+":adobe_furnace", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID+":adobe_wall", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID+":adobe_stairs", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID+":adobe_slab", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID+":adobe_glass", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID+":adobe_glass_pane", "inventory"));
+	private void registerItemRenders() {
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID + ":adobe_mixture_block", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID + ":adobe_tile", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID + ":adobe_bricks", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID + ":adobe_wall", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID + ":adobe_stairs", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID + ":adobe_slab", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID + ":adobe_glass", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID + ":adobe_glass_pane", "inventory"));
 
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID+":adobe_mixture", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID+":adobe_brick", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_sword, 0, new ModelResourceLocation(MODID+":adobe_sword", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_pickaxe, 0, new ModelResourceLocation(MODID+":adobe_pickaxe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_axe, 0, new ModelResourceLocation(MODID+":adobe_axe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_shovel, 0, new ModelResourceLocation(MODID+":adobe_shovel", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID+":adobe_hoe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID+":stone_stick", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID+":adobe_door", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(throwing_stone, 0, new ModelResourceLocation(MODID+":adobe_throwing_stone", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID + ":adobe_mixture", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID + ":adobe_brick", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_sword, 0, new ModelResourceLocation(MODID + ":adobe_sword", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_pickaxe, 0, new ModelResourceLocation(MODID + ":adobe_pickaxe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_axe, 0, new ModelResourceLocation(MODID + ":adobe_axe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_shovel, 0, new ModelResourceLocation(MODID + ":adobe_shovel", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID + ":adobe_hoe", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID + ":stone_stick", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID + ":adobe_door", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(throwing_stone, 0, new ModelResourceLocation(MODID + ":adobe_throwing_stone", "inventory"));
 	}
 
-	private void registerItem(Item item){
+	private void registerItem(Item item) {
 		GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 	}
 
-	private void registerBlock(Block block){
+	private void registerBlock(Block block) {
 		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
+
 	public static final String LATEST = "https://dl.dropboxusercontent.com/s/8sdl3cynu7345k4/release.version?dl=0";
 }

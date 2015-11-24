@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "adobeblocks:adobe_tile" }
+  "variants": {
+    "normal": {
+      "model": "adobeblocks:adobe_tile"
     }
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "adobeblocks:adobe_mixture_block" }
+  "variants": {
+    "normal": {
+      "model": "adobeblocks:adobe_mixture_block"
     }
+  }
 }

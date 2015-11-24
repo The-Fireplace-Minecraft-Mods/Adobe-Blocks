@@ -22,7 +22,7 @@ public abstract class AdobeSlab extends BlockSlab {
 
 	public AdobeSlab() {
 		super(AdobeBlocks.adobe);
-		if(!this.isDouble())
+		if (!this.isDouble())
 			setCreativeTab(AdobeBlocks.TabAdobeBlocks);
 		setHardness(2.0F);
 		setResistance(10.0F);
@@ -33,11 +33,12 @@ public abstract class AdobeSlab extends BlockSlab {
 
 		IBlockState blockState = this.blockState.getBaseState();
 		blockState = blockState.withProperty(VARIANT_PROPERTY, false);
-		if(!this.isDouble()){
+		if (!this.isDouble()) {
 			blockState = blockState.withProperty(HALF, EnumBlockHalf.BOTTOM);
 		}
 		setDefaultState(blockState);
 	}
+
 	@Override
 	public IProperty getVariantProperty() {
 		return VARIANT_PROPERTY;
@@ -52,13 +53,14 @@ public abstract class AdobeSlab extends BlockSlab {
 	public String getUnlocalizedName(int meta) {
 		return this.getUnlocalizedName();
 	}
+
 	@Override
-	public final IBlockState getStateFromMeta(final int meta){
+	public final IBlockState getStateFromMeta(final int meta) {
 		IBlockState state = this.getDefaultState();
 		state = state.withProperty(VARIANT_PROPERTY, false);
-		if(!this.isDouble()){
+		if (!this.isDouble()) {
 			EnumBlockHalf value = EnumBlockHalf.BOTTOM;
-			if((meta & 8) != 0){
+			if ((meta & 8) != 0) {
 				value = EnumBlockHalf.TOP;
 			}
 
@@ -66,46 +68,53 @@ public abstract class AdobeSlab extends BlockSlab {
 		}
 		return state;
 	}
+
 	@Override
-	public final int getMetaFromState(final IBlockState state){
-		if(this.isDouble()){
+	public final int getMetaFromState(final IBlockState state) {
+		if (this.isDouble()) {
 			return 0;
 		}
-		if((EnumBlockHalf)state.getValue(HALF) == EnumBlockHalf.TOP){
+		if ((EnumBlockHalf) state.getValue(HALF) == EnumBlockHalf.TOP) {
 			return 8;
-		}else{
+		} else {
 			return 0;
 		}
 	}
+
 	@Override
-	public final int damageDropped(final IBlockState state){
+	public final int damageDropped(final IBlockState state) {
 		return 0;
 	}
+
 	@Override
-	public final Item getItemDropped(IBlockState state, Random rand, int unused){
+	public final Item getItemDropped(IBlockState state, Random rand, int unused) {
 		return getItemFromBlock(innerGetId(false));
 	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
-	public final Item getItem(World world, BlockPos pos){
+	public final Item getItem(World world, BlockPos pos) {
 		return getItemFromBlock(innerGetId(false));
 	}
+
 	@Override
-	protected final BlockState createBlockState(){
-		if(this.isDouble()){
+	protected final BlockState createBlockState() {
+		if (this.isDouble()) {
 			return new BlockState(this, new IProperty[]{VARIANT_PROPERTY});
-		}else{
+		} else {
 			return new BlockState(this, new IProperty[]{VARIANT_PROPERTY, HALF});
 		}
 	}
-	private String innerGetId(boolean isDoubleStacked){
-		String result="";
-		if(isDoubleStacked){
-			result="double_";
+
+	private String innerGetId(boolean isDoubleStacked) {
+		String result = "";
+		if (isDoubleStacked) {
+			result = "double_";
 		}
-		return result+"adobe_slab";
+		return result + "adobe_slab";
 	}
-	private static Item getItemFromBlock(String name){
+
+	private static Item getItemFromBlock(String name) {
 		return GameRegistry.findItem(AdobeBlocks.MODID, name);
 	}
 }

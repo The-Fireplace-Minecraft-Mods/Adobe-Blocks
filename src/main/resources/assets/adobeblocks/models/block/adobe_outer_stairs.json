@@ -1,8 +1,8 @@
 {
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "adobeblocks:blocks/adobe_bricks",
-        "top": "adobeblocks:blocks/adobe_bricks",
-        "side": "adobeblocks:blocks/adobe_bricks"
-    }
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "adobeblocks:blocks/adobe_bricks",
+    "top": "adobeblocks:blocks/adobe_bricks",
+    "side": "adobeblocks:blocks/adobe_bricks"
+  }
 }

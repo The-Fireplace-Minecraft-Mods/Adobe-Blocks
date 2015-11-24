@@ -10,8 +10,8 @@ import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
  * @author The_Fireplace
  */
 public class DispenseBehaviorThrowingStone extends BehaviorProjectileDispense {
-		@Override
-		protected IProjectile getProjectileEntity(World worldIn, IPosition position){
-				return new EntityThrowingStone(worldIn, position.getX(), position.getY(), position.getZ());
-			}
+	@Override
+	protected IProjectile getProjectileEntity(World worldIn, IPosition position) {
+		return new EntityThrowingStone(worldIn, position.getX(), position.getY(), position.getZ());
 	}
+}

@@ -24,8 +24,7 @@ public class AdobeWall extends Block {
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool WEST = PropertyBool.create("west");
 
-	public AdobeWall()
-	{
+	public AdobeWall() {
 		super(AdobeBlocks.adobe);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 		this.setHardness(2.0F);
@@ -36,38 +35,32 @@ public class AdobeWall extends Block {
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState();
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		return 0;
 	}
 
 	@Override
-	public boolean isFullCube()
-	{
+	public boolean isFullCube() {
 		return false;
 	}
 
 	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
-	{
+	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
 		boolean flag = this.canConnectTo(worldIn, pos.north());
 		boolean flag1 = this.canConnectTo(worldIn, pos.south());
 		boolean flag2 = this.canConnectTo(worldIn, pos.west());
@@ -78,34 +71,27 @@ public class AdobeWall extends Block {
 		float f3 = 0.75F;
 		float f4 = 1.0F;
 
-		if (flag)
-		{
+		if (flag) {
 			f2 = 0.0F;
 		}
 
-		if (flag1)
-		{
+		if (flag1) {
 			f3 = 1.0F;
 		}
 
-		if (flag2)
-		{
+		if (flag2) {
 			f = 0.0F;
 		}
 
-		if (flag3)
-		{
+		if (flag3) {
 			f1 = 1.0F;
 		}
 
-		if (flag && flag1 && !flag2 && !flag3)
-		{
+		if (flag && flag1 && !flag2 && !flag3) {
 			f4 = 0.8125F;
 			f = 0.3125F;
 			f1 = 0.6875F;
-		}
-		else if (!flag && !flag1 && flag2 && flag3)
-		{
+		} else if (!flag && !flag1 && flag2 && flag3) {
 			f4 = 0.8125F;
 			f2 = 0.3125F;
 			f3 = 0.6875F;
@@ -115,23 +101,20 @@ public class AdobeWall extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
 		this.setBlockBoundsBasedOnState(worldIn, pos);
 		this.maxY = 1.5D;
 		return super.getCollisionBoundingBox(worldIn, pos, state);
 	}
 
-	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos)
-	{
+	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
 		return block == Blocks.barrier ? false : (block != this && !(block instanceof BlockFenceGate) ? (block.getMaterial().isOpaque() && block.isFullCube() ? block.getMaterial() != Material.gourd : false) : true);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-	{
+	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
 		return side == EnumFacing.DOWN ? super.shouldSideBeRendered(worldIn, pos, side) : true;
 	}
 
@@ -140,14 +123,12 @@ public class AdobeWall extends Block {
 	 * metadata, such as fence connections.
 	 */
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return state.withProperty(UP, Boolean.valueOf(!worldIn.isAirBlock(pos.up()))).withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(worldIn, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(worldIn, pos.west())));
 	}
 
 	@Override
-	protected BlockState createBlockState()
-	{
-		return new BlockState(this, new IProperty[] {UP, NORTH, EAST, WEST, SOUTH});
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[]{UP, NORTH, EAST, WEST, SOUTH});
 	}
 }

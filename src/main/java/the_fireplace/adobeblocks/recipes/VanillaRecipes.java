@@ -41,7 +41,7 @@ public class VanillaRecipes {
 	static ItemStack adobeHoeStack = new ItemStack(AdobeBlocks.adobe_hoe);
 	static ItemStack throwingStoneStack2 = new ItemStack(AdobeBlocks.throwing_stone);
 
-	public static void initRecipes(){
+	public static void initRecipes() {
 		GameRegistry.addShapelessRecipe(throwingStoneStack2, adobeBrickStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack9, adobeMixtureBlockStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack32, waterStack, dirtStack, dirtStack, dirtStack, dirtStack, sandStack, sandStack, sandStack, sandStack);

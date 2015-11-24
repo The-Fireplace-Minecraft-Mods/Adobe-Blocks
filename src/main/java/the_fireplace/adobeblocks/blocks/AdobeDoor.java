@@ -32,159 +32,116 @@ public class AdobeDoor extends Block {
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
 	public static final PropertyEnum HALF = PropertyEnum.create("half", BlockDoor.EnumDoorHalf.class);
 
-	public AdobeDoor()
-	{
+	public AdobeDoor() {
 		super(AdobeBlocks.adobe);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HINGE, BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));
 		this.setUnlocalizedName("adobe_door");
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
-	{
+	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
 		return isOpen(combineMetadata(worldIn, pos));
 	}
 
 	@Override
-	public boolean isFullCube()
-	{
+	public boolean isFullCube() {
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos) {
 		this.setBlockBoundsBasedOnState(worldIn, pos);
 		return super.getSelectedBoundingBox(worldIn, pos);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
 		this.setBlockBoundsBasedOnState(worldIn, pos);
 		return super.getCollisionBoundingBox(worldIn, pos, state);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
 		this.setBoundBasedOnMeta(combineMetadata(worldIn, pos));
 	}
 
-	private void setBoundBasedOnMeta(int combinedMeta)
-	{
+	private void setBoundBasedOnMeta(int combinedMeta) {
 		float f = 0.1875F;
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F);
 		EnumFacing enumfacing = getFacing(combinedMeta);
 		boolean flag = isOpen(combinedMeta);
 		boolean flag1 = isHingeLeft(combinedMeta);
 
-		if (flag)
-		{
-			if (enumfacing == EnumFacing.EAST)
-			{
-				if (!flag1)
-				{
+		if (flag) {
+			if (enumfacing == EnumFacing.EAST) {
+				if (!flag1) {
 					this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-				}
-				else
-				{
+				} else {
 					this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
 				}
-			}
-			else if (enumfacing == EnumFacing.SOUTH)
-			{
-				if (!flag1)
-				{
+			} else if (enumfacing == EnumFacing.SOUTH) {
+				if (!flag1) {
 					this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				}
-				else
-				{
+				} else {
 					this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
 				}
-			}
-			else if (enumfacing == EnumFacing.WEST)
-			{
-				if (!flag1)
-				{
+			} else if (enumfacing == EnumFacing.WEST) {
+				if (!flag1) {
 					this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
-				}
-				else
-				{
+				} else {
 					this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
 				}
-			}
-			else if (enumfacing == EnumFacing.NORTH)
-			{
-				if (!flag1)
-				{
+			} else if (enumfacing == EnumFacing.NORTH) {
+				if (!flag1) {
 					this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-				}
-				else
-				{
+				} else {
 					this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 				}
 			}
-		}
-		else if (enumfacing == EnumFacing.EAST)
-		{
+		} else if (enumfacing == EnumFacing.EAST) {
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-		}
-		else if (enumfacing == EnumFacing.SOUTH)
-		{
+		} else if (enumfacing == EnumFacing.SOUTH) {
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-		}
-		else if (enumfacing == EnumFacing.WEST)
-		{
+		} else if (enumfacing == EnumFacing.WEST) {
 			this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		}
-		else if (enumfacing == EnumFacing.NORTH)
-		{
+		} else if (enumfacing == EnumFacing.NORTH) {
 			this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
 		BlockPos blockpos1 = state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
 		IBlockState iblockstate1 = pos.equals(blockpos1) ? state : worldIn.getBlockState(blockpos1);
 
-		if (iblockstate1.getBlock() != this)
-		{
+		if (iblockstate1.getBlock() != this) {
 			return false;
-		}
-		else
-		{
+		} else {
 			state = iblockstate1.cycleProperty(OPEN);
 			worldIn.setBlockState(blockpos1, state, 2);
 			worldIn.markBlockRangeForRenderUpdate(blockpos1, pos);
-			worldIn.playAuxSFXAtEntity(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? 1003 : 1006, pos, 0);
+			worldIn.playAuxSFXAtEntity(playerIn, ((Boolean) state.getValue(OPEN)).booleanValue() ? 1003 : 1006, pos, 0);
 			return true;
 		}
 	}
 
-	public void toggleDoor(World worldIn, BlockPos pos, boolean open)
-	{
+	public void toggleDoor(World worldIn, BlockPos pos, boolean open) {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 
-		if (iblockstate.getBlock() == this)
-		{
+		if (iblockstate.getBlock() == this) {
 			BlockPos blockpos1 = iblockstate.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
 			IBlockState iblockstate1 = pos == blockpos1 ? iblockstate : worldIn.getBlockState(blockpos1);
 
-			if (iblockstate1.getBlock() == this && ((Boolean)iblockstate1.getValue(OPEN)).booleanValue() != open)
-			{
+			if (iblockstate1.getBlock() == this && ((Boolean) iblockstate1.getValue(OPEN)).booleanValue() != open) {
 				worldIn.setBlockState(blockpos1, iblockstate1.withProperty(OPEN, Boolean.valueOf(open)), 2);
 				worldIn.markBlockRangeForRenderUpdate(blockpos1, pos);
-				worldIn.playAuxSFXAtEntity((EntityPlayer)null, open ? 1003 : 1006, pos, 0);
+				worldIn.playAuxSFXAtEntity((EntityPlayer) null, open ? 1003 : 1006, pos, 0);
 			}
 		}
 	}
@@ -193,65 +150,49 @@ public class AdobeDoor extends Block {
 	 * Called when a neighboring block changes.
 	 */
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
-	{
-		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER)
-		{
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
 			BlockPos blockpos1 = pos.down();
 			IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
 
-			if (iblockstate1.getBlock() != this)
-			{
+			if (iblockstate1.getBlock() != this) {
 				worldIn.setBlockToAir(pos);
-			}
-			else if (neighborBlock != this)
-			{
+			} else if (neighborBlock != this) {
 				this.onNeighborBlockChange(worldIn, blockpos1, iblockstate1, neighborBlock);
 			}
-		}
-		else
-		{
+		} else {
 			boolean flag1 = false;
 			BlockPos blockpos2 = pos.up();
 			IBlockState iblockstate2 = worldIn.getBlockState(blockpos2);
 
-			if (iblockstate2.getBlock() != this)
-			{
+			if (iblockstate2.getBlock() != this) {
 				worldIn.setBlockToAir(pos);
 				flag1 = true;
 			}
 
-			if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()))
-			{
+			if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down())) {
 				worldIn.setBlockToAir(pos);
 				flag1 = true;
 
-				if (iblockstate2.getBlock() == this)
-				{
+				if (iblockstate2.getBlock() == this) {
 					worldIn.setBlockToAir(blockpos2);
 				}
 			}
 
-			if (flag1)
-			{
-				if (!worldIn.isRemote)
-				{
+			if (flag1) {
+				if (!worldIn.isRemote) {
 					this.dropBlockAsItem(worldIn, pos, state, 0);
 				}
-			}
-			else
-			{
+			} else {
 				boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(blockpos2);
 
-				if ((flag || neighborBlock.canProvidePower()) && neighborBlock != this && flag != ((Boolean)iblockstate2.getValue(POWERED)).booleanValue())
-				{
+				if ((flag || neighborBlock.canProvidePower()) && neighborBlock != this && flag != ((Boolean) iblockstate2.getValue(POWERED)).booleanValue()) {
 					worldIn.setBlockState(blockpos2, iblockstate2.withProperty(POWERED, Boolean.valueOf(flag)), 2);
 
-					if (flag != ((Boolean)state.getValue(OPEN)).booleanValue())
-					{
+					if (flag != ((Boolean) state.getValue(OPEN)).booleanValue()) {
 						worldIn.setBlockState(pos, state.withProperty(OPEN, Boolean.valueOf(flag)), 2);
 						worldIn.markBlockRangeForRenderUpdate(pos, pos);
-						worldIn.playAuxSFXAtEntity((EntityPlayer)null, flag ? 1003 : 1006, pos, 0);
+						worldIn.playAuxSFXAtEntity((EntityPlayer) null, flag ? 1003 : 1006, pos, 0);
 					}
 				}
 			}
@@ -264,8 +205,7 @@ public class AdobeDoor extends Block {
 	 * @param fortune the level of the Fortune enchantment on the player's tool
 	 */
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? null : AdobeBlocks.adobe_door;
 	}
 
@@ -273,29 +213,25 @@ public class AdobeDoor extends Block {
 	 * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit.
 	 *
 	 * @param start The start vector
-	 * @param end The end vector
+	 * @param end   The end vector
 	 */
 	@Override
-	public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
-	{
+	public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end) {
 		this.setBlockBoundsBasedOnState(worldIn, pos);
 		return super.collisionRayTrace(worldIn, pos, start, end);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-	{
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		return pos.getY() >= worldIn.getHeight() - 1 ? false : World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up());
 	}
 
 	@Override
-	public int getMobilityFlag()
-	{
+	public int getMobilityFlag() {
 		return 1;
 	}
 
-	public static int combineMetadata(IBlockAccess worldIn, BlockPos pos)
-	{
+	public static int combineMetadata(IBlockAccess worldIn, BlockPos pos) {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		int i = iblockstate.getBlock().getMetaFromState(iblockstate);
 		boolean flag = isTop(i);
@@ -312,18 +248,15 @@ public class AdobeDoor extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World worldIn, BlockPos pos)
-	{
+	public Item getItem(World worldIn, BlockPos pos) {
 		return AdobeBlocks.adobe_door;
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-	{
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
 		BlockPos blockpos1 = pos.down();
 
-		if (player.capabilities.isCreativeMode && state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER && worldIn.getBlockState(blockpos1).getBlock() == this)
-		{
+		if (player.capabilities.isCreativeMode && state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER && worldIn.getBlockState(blockpos1).getBlock() == this) {
 			worldIn.setBlockToAir(blockpos1);
 		}
 	}
@@ -333,25 +266,19 @@ public class AdobeDoor extends Block {
 	 * metadata, such as fence connections.
 	 */
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		IBlockState iblockstate1;
 
-		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER)
-		{
+		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER) {
 			iblockstate1 = worldIn.getBlockState(pos.up());
 
-			if (iblockstate1.getBlock() == this)
-			{
+			if (iblockstate1.getBlock() == this) {
 				state = state.withProperty(HINGE, iblockstate1.getValue(HINGE)).withProperty(POWERED, iblockstate1.getValue(POWERED));
 			}
-		}
-		else
-		{
+		} else {
 			iblockstate1 = worldIn.getBlockState(pos.down());
 
-			if (iblockstate1.getBlock() == this)
-			{
+			if (iblockstate1.getBlock() == this) {
 				state = state.withProperty(FACING, iblockstate1.getValue(FACING)).withProperty(OPEN, iblockstate1.getValue(OPEN));
 			}
 		}
@@ -363,15 +290,13 @@ public class AdobeDoor extends Block {
 	 * Convert the given metadata into a BlockState for this Block
 	 */
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.UPPER).withProperty(HINGE, (meta & 1) > 0 ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf((meta & 2) > 0)) : this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER).withProperty(FACING, EnumFacing.getHorizontal(meta & 3).rotateYCCW()).withProperty(OPEN, Boolean.valueOf((meta & 4) > 0));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
+	public EnumWorldBlockLayer getBlockLayer() {
 		return EnumWorldBlockLayer.CUTOUT;
 	}
 
@@ -379,31 +304,24 @@ public class AdobeDoor extends Block {
 	 * Convert the BlockState into the correct metadata value
 	 */
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		byte b0 = 0;
 		int i;
 
-		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER)
-		{
+		if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER) {
 			i = b0 | 8;
 
-			if (state.getValue(HINGE) == BlockDoor.EnumHingePosition.RIGHT)
-			{
+			if (state.getValue(HINGE) == BlockDoor.EnumHingePosition.RIGHT) {
 				i |= 1;
 			}
 
-			if (((Boolean)state.getValue(POWERED)).booleanValue())
-			{
+			if (((Boolean) state.getValue(POWERED)).booleanValue()) {
 				i |= 2;
 			}
-		}
-		else
-		{
-			i = b0 | ((EnumFacing)state.getValue(FACING)).rotateY().getHorizontalIndex();
+		} else {
+			i = b0 | ((EnumFacing) state.getValue(FACING)).rotateY().getHorizontalIndex();
 
-			if (((Boolean)state.getValue(OPEN)).booleanValue())
-			{
+			if (((Boolean) state.getValue(OPEN)).booleanValue()) {
 				i |= 4;
 			}
 		}
@@ -411,79 +329,65 @@ public class AdobeDoor extends Block {
 		return i;
 	}
 
-	protected static int removeHalfBit(int meta)
-	{
+	protected static int removeHalfBit(int meta) {
 		return meta & 7;
 	}
 
-	public static boolean isOpen(IBlockAccess worldIn, BlockPos pos)
-	{
+	public static boolean isOpen(IBlockAccess worldIn, BlockPos pos) {
 		return isOpen(combineMetadata(worldIn, pos));
 	}
 
-	public static EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos)
-	{
+	public static EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos) {
 		return getFacing(combineMetadata(worldIn, pos));
 	}
 
-	public static EnumFacing getFacing(int combinedMeta)
-	{
+	public static EnumFacing getFacing(int combinedMeta) {
 		return EnumFacing.getHorizontal(combinedMeta & 3).rotateYCCW();
 	}
 
-	protected static boolean isOpen(int combinedMeta)
-	{
+	protected static boolean isOpen(int combinedMeta) {
 		return (combinedMeta & 4) != 0;
 	}
 
-	protected static boolean isTop(int meta)
-	{
+	protected static boolean isTop(int meta) {
 		return (meta & 8) != 0;
 	}
 
-	protected static boolean isHingeLeft(int combinedMeta)
-	{
+	protected static boolean isHingeLeft(int combinedMeta) {
 		return (combinedMeta & 16) != 0;
 	}
 
 	@Override
-	protected BlockState createBlockState()
-	{
-		return new BlockState(this, new IProperty[] {HALF, FACING, OPEN, HINGE, POWERED});
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[]{HALF, FACING, OPEN, HINGE, POWERED});
 	}
 
-	public static enum EnumDoorHalf implements IStringSerializable
-	{
+	public static enum EnumDoorHalf implements IStringSerializable {
 		UPPER,
 		LOWER;
 
 		@Override
-		public String toString()
-		{
+		public String toString() {
 			return this.getName();
 		}
 
 		@Override
-		public String getName()
-		{
+		public String getName() {
 			return this == UPPER ? "upper" : "lower";
 		}
 	}
 
-	public static enum EnumHingePosition implements IStringSerializable
-	{
+	public static enum EnumHingePosition implements IStringSerializable {
 		LEFT,
 		RIGHT;
 
 		@Override
-		public String toString()
-		{
+		public String toString() {
 			return this.getName();
 		}
 
 		@Override
-		public String getName()
-		{
+		public String getName() {
 			return this == LEFT ? "left" : "right";
 		}
 	}

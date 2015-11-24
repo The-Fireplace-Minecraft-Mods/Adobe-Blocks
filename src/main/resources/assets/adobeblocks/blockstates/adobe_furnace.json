@@ -1,8 +1,19 @@
 {
-    "variants": {
-        "facing=north": { "model": "adobeblocks:adobe_furnace" },
-        "facing=south": { "model": "adobeblocks:adobe_furnace", "y": 180 },
-        "facing=west":  { "model": "adobeblocks:adobe_furnace", "y": 270 },
-        "facing=east":  { "model": "adobeblocks:adobe_furnace", "y": 90 }
+  "variants": {
+    "facing=north": {
+      "model": "adobeblocks:adobe_furnace"
+    },
+    "facing=south": {
+      "model": "adobeblocks:adobe_furnace",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "adobeblocks:adobe_furnace",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "adobeblocks:adobe_furnace",
+      "y": 90
     }
+  }
 }

@@ -19,8 +19,7 @@ public class RenderThrowingStone extends Render {
 	protected final Item itr;
 	private final RenderItem ri;
 
-	public RenderThrowingStone(RenderManager manager)
-	{
+	public RenderThrowingStone(RenderManager manager) {
 		super(manager);
 		this.itr = AdobeBlocks.throwing_stone;
 		this.ri = Minecraft.getMinecraft().getRenderItem();
@@ -33,10 +32,9 @@ public class RenderThrowingStone extends Render {
 	 * double d2, float f, float f1). But JAD is pre 1.5 so doe
 	 */
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks)
-	{
+	public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks) {
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float)x, (float)y, (float)z);
+		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
@@ -48,8 +46,7 @@ public class RenderThrowingStone extends Render {
 		super.doRender(entity, x, y, z, p_76986_8_, partialTicks);
 	}
 
-	public ItemStack func_177082_d(Entity p_177082_1_)
-	{
+	public ItemStack func_177082_d(Entity p_177082_1_) {
 		return new ItemStack(this.itr, 1, 0);
 	}
 
@@ -57,8 +54,7 @@ public class RenderThrowingStone extends Render {
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return TextureMap.locationBlocksTexture;
 	}
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "block/door_bottom",
-    "textures": {
-        "bottom": "adobeblocks:blocks/adobe_door_lower",
-        "top": "adobeblocks:blocks/adobe_door_upper"
-    }
+  "parent": "block/door_bottom",
+  "textures": {
+    "bottom": "adobeblocks:blocks/adobe_door_lower",
+    "top": "adobeblocks:blocks/adobe_door_upper"
+  }
 }

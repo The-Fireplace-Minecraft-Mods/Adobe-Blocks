@@ -11,8 +11,9 @@ public class AdobeStairs extends BlockStairs {
 		this.setUnlocalizedName("adobe_stairs");
 		this.useNeighborBrightness = true;
 	}
+
 	@Override
-	public CreativeTabs getCreativeTabToDisplayOn(){
+	public CreativeTabs getCreativeTabToDisplayOn() {
 		return AdobeBlocks.TabAdobeBlocks;
 	}
 }

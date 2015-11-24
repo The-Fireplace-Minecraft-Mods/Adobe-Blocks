@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "adobeblocks:adobe_glass" }
+  "variants": {
+    "normal": {
+      "model": "adobeblocks:adobe_glass"
     }
+  }
 }

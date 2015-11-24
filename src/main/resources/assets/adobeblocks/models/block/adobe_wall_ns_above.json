@@ -1,6 +1,6 @@
 {
-    "parent": "block/wall_ns_above",
-    "textures": {
-        "wall": "adobeblocks:blocks/adobe_bricks"
-    }
+  "parent": "block/wall_ns_above",
+  "textures": {
+    "wall": "adobeblocks:blocks/adobe_bricks"
+  }
 }

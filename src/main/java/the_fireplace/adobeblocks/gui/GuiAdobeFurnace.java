@@ -13,12 +13,13 @@ import the_fireplace.adobeblocks.container.ContainerAdobeFurnace;
 @SideOnly(Side.CLIENT)
 public class GuiAdobeFurnace extends GuiContainer {
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("adobeblocks:textures/gui/furnace.png");
-	/** The player inventory bound to this GUI. */
+	/**
+	 * The player inventory bound to this GUI.
+	 */
 	private final InventoryPlayer playerInventory;
 	private IInventory tileFurnace;
 
-	public GuiAdobeFurnace(InventoryPlayer playerInv, IInventory furnaceInv)
-	{
+	public GuiAdobeFurnace(InventoryPlayer playerInv, IInventory furnaceInv) {
 		super(new ContainerAdobeFurnace(playerInv, furnaceInv));
 		this.playerInventory = playerInv;
 		this.tileFurnace = furnaceInv;
@@ -28,8 +29,7 @@ public class GuiAdobeFurnace extends GuiContainer {
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items). Args : mouseX, mouseY
 	 */
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-	{
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String s = this.tileFurnace.getDisplayName().getUnformattedText();
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
@@ -39,8 +39,7 @@ public class GuiAdobeFurnace extends GuiContainer {
 	 * Args : renderPartialTicks, mouseX, mouseY
 	 */
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
 		int k = (this.width - this.xSize) / 2;
@@ -48,8 +47,7 @@ public class GuiAdobeFurnace extends GuiContainer {
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		int i1;
 
-		if (TileEntityFurnace.isBurning(this.tileFurnace))
-		{
+		if (TileEntityFurnace.isBurning(this.tileFurnace)) {
 			i1 = this.func_175382_i(13);
 			this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
 		}
@@ -58,19 +56,16 @@ public class GuiAdobeFurnace extends GuiContainer {
 		this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
 	}
 
-	private int func_175381_h(int p_175381_1_)
-	{
+	private int func_175381_h(int p_175381_1_) {
 		int j = this.tileFurnace.getField(2);
 		int k = this.tileFurnace.getField(3);
 		return k != 0 && j != 0 ? j * p_175381_1_ / k : 0;
 	}
 
-	private int func_175382_i(int p_175382_1_)
-	{
+	private int func_175382_i(int p_175382_1_) {
 		int j = this.tileFurnace.getField(1);
 
-		if (j == 0)
-		{
+		if (j == 0) {
 			j = 200;
 		}
 
