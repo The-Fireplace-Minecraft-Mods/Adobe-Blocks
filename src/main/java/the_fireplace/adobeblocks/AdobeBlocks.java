@@ -1,6 +1,7 @@
 package the_fireplace.adobeblocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -34,6 +35,7 @@ import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
+import the_fireplace.adobeblocks.handlers.DispenseBehaviorThrowingStone;
 import the_fireplace.adobeblocks.items.AdobeAxe;
 import the_fireplace.adobeblocks.items.AdobeHoe;
 import the_fireplace.adobeblocks.items.AdobePickaxe;
@@ -120,6 +122,7 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event){
+		BlockDispenser.dispenseBehaviorRegistry.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
 		proxy.registerRenderers();
 		if(event.getSide().isClient()){
