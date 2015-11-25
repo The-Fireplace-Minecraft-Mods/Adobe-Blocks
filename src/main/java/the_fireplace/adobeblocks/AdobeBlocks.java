@@ -19,30 +19,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import the_fireplace.adobeblocks.blocks.AdobeBricks;
-import the_fireplace.adobeblocks.blocks.AdobeDoor;
-import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
-import the_fireplace.adobeblocks.blocks.AdobeFurnace;
-import the_fireplace.adobeblocks.blocks.AdobeGlass;
-import the_fireplace.adobeblocks.blocks.AdobeHalfSlab;
-import the_fireplace.adobeblocks.blocks.AdobeMixtureBlock;
-import the_fireplace.adobeblocks.blocks.AdobePane;
-import the_fireplace.adobeblocks.blocks.AdobeSlab;
-import the_fireplace.adobeblocks.blocks.AdobeStairs;
-import the_fireplace.adobeblocks.blocks.AdobeTile;
-import the_fireplace.adobeblocks.blocks.AdobeWall;
-import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
+import the_fireplace.adobeblocks.blocks.*;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.handlers.DispenseBehaviorThrowingStone;
-import the_fireplace.adobeblocks.items.AdobeAxe;
-import the_fireplace.adobeblocks.items.AdobeHoe;
-import the_fireplace.adobeblocks.items.AdobePickaxe;
-import the_fireplace.adobeblocks.items.AdobeShovel;
-import the_fireplace.adobeblocks.items.AdobeSword;
-import the_fireplace.adobeblocks.items.ItemAdobeDoor;
-import the_fireplace.adobeblocks.items.ThrowingStone;
+import the_fireplace.adobeblocks.items.*;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
@@ -53,7 +35,7 @@ public class AdobeBlocks {
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks 2";
-	public static final String VERSION = "2.1.1.0";
+	public static final String VERSION = "3.0.1.0";
 	public static final String downloadURL = "http://goo.gl/bYlW4b";
 
 	@SidedProxy(clientSide = "the_fireplace.adobeblocks.proxy.ClientProxy", serverSide = "the_fireplace.adobeblocks.proxy.CommonProxy")
@@ -75,6 +57,12 @@ public class AdobeBlocks {
 	public static final Block adobe_glass = new AdobeGlass();
 	public static final Block adobe_door_internal = new AdobeDoor();
 	public static final Block adobe_glass_pane = new AdobePane(false).setUnlocalizedName("adobe_glass_pane").setHardness(0.3F).setStepSound(Block.soundTypeGlass);
+	public static final Block oak_beam = new Beam(Material.wood).setUnlocalizedName("oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block birch_beam = new Beam(Material.wood).setUnlocalizedName("birch_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block spruce_beam = new Beam(Material.wood).setUnlocalizedName("spruce_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block jungle_beam = new Beam(Material.wood).setUnlocalizedName("jungle_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block dark_oak_beam = new Beam(Material.wood).setUnlocalizedName("dark_oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block acacia_beam = new Beam(Material.wood).setUnlocalizedName("acacia_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
@@ -105,6 +93,12 @@ public class AdobeBlocks {
 		registerBlock(adobe_glass);
 		registerBlock(adobe_door_internal);
 		registerBlock(adobe_glass_pane);
+		registerBlock(oak_beam);
+		registerBlock(birch_beam);
+		registerBlock(spruce_beam);
+		registerBlock(jungle_beam);
+		registerBlock(dark_oak_beam);
+		registerBlock(acacia_beam);
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 		registerItem(adobe_sword);
@@ -141,6 +135,12 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID + ":adobe_slab", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID + ":adobe_glass", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID + ":adobe_glass_pane", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(oak_beam), 0, new ModelResourceLocation(MODID + ":oak_beam", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(spruce_beam), 0, new ModelResourceLocation(MODID + ":spruce_beam", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(jungle_beam), 0, new ModelResourceLocation(MODID + ":jungle_beam", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(birch_beam), 0, new ModelResourceLocation(MODID + ":birch_beam", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(dark_oak_beam), 0, new ModelResourceLocation(MODID + ":dark_oak_beam", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(acacia_beam), 0, new ModelResourceLocation(MODID + ":acacia_beam", "inventory"));
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID + ":adobe_mixture", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID + ":adobe_brick", "inventory"));

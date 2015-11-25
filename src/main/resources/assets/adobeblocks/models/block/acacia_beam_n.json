@@ -1,0 +1,6 @@
+{
+  "parent": "adobeblocks:block/beam_n",
+  "textures": {
+    "texture": "blocks/planks_acacia"
+  }
+}

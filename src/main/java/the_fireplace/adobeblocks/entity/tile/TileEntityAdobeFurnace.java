@@ -19,9 +19,9 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.container.ContainerAdobeFurnace;
 
-public class TileEntityAdobeFurnace extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory {
+public class TileEntityAdobeFurnace extends TileEntityLockable implements ITickable, ISidedInventory {
 	private static final int[] slotsTop = new int[]{0};
 	private static final int[] slotsBottom = new int[]{2, 1};
 	private static final int[] slotsSides = new int[]{1};
@@ -130,7 +130,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements IUpdat
 	 * Gets the name of this command sender (usually username, but possibly "Rcon")
 	 */
 	@Override
-	public String getName() {
+	public String getCommandSenderName() {
 		return this.hasCustomName() ? this.furnaceCustomName : "tile.adobe_furnace.name";
 	}
 

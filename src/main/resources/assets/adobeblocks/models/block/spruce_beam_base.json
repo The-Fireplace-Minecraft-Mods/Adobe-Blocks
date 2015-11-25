@@ -1,0 +1,6 @@
+{
+  "parent": "adobeblocks:block/beam_base",
+  "textures": {
+    "texture": "blocks/planks_spruce"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "adobeblocks:dark_oak_beam_base" },
+    "east=false,north=true,south=false,west=false": { "model": "adobeblocks:dark_oak_beam_n", "uvlock": true },
+    "east=true,north=false,south=false,west=false": { "model": "adobeblocks:dark_oak_beam_n", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=false": { "model": "adobeblocks:dark_oak_beam_n", "y": 180, "uvlock": true },
+    "east=false,north=false,south=false,west=true": { "model": "adobeblocks:dark_oak_beam_n", "y": 270, "uvlock": true },
+    "east=true,north=true,south=false,west=false": { "model": "adobeblocks:dark_oak_beam_ne", "uvlock": true },
+    "east=true,north=false,south=true,west=false": { "model": "adobeblocks:dark_oak_beam_ne", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=true": { "model": "adobeblocks:dark_oak_beam_ne", "y": 180, "uvlock": true },
+    "east=false,north=true,south=false,west=true": { "model": "adobeblocks:dark_oak_beam_ne", "y": 270, "uvlock": true },
+    "east=false,north=true,south=true,west=false": { "model": "adobeblocks:dark_oak_beam_ns", "uvlock": true },
+    "east=true,north=false,south=false,west=true": { "model": "adobeblocks:dark_oak_beam_ns", "y": 90, "uvlock": true },
+    "east=true,north=true,south=true,west=false": { "model": "adobeblocks:dark_oak_beam_nse", "uvlock": true },
+    "east=true,north=false,south=true,west=true": { "model": "adobeblocks:dark_oak_beam_nse", "y": 90, "uvlock": true },
+    "east=false,north=true,south=true,west=true": { "model": "adobeblocks:dark_oak_beam_nse", "y": 180, "uvlock": true },
+    "east=true,north=true,south=false,west=true": { "model": "adobeblocks:dark_oak_beam_nse", "y": 270, "uvlock": true },
+    "east=true,north=true,south=true,west=true": { "model": "adobeblocks:dark_oak_beam_nsew", "uvlock": true }
+  }
+}

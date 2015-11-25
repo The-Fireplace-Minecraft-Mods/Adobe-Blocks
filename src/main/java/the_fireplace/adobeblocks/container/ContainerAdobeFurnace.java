@@ -44,8 +44,8 @@ public class ContainerAdobeFurnace extends Container {
 	 * Add the given Listener to the list of Listeners. Method name is for legacy.
 	 */
 	@Override
-	public void addCraftingToCrafters(ICrafting listener) {
-		super.addCraftingToCrafters(listener);
+	public void onCraftGuiOpened(ICrafting listener) {
+		super.onCraftGuiOpened(listener);
 		listener.func_175173_a(this, this.tileFurnace);
 	}
 

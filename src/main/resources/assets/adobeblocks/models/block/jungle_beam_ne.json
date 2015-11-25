@@ -1,0 +1,6 @@
+{
+  "parent": "adobeblocks:block/beam_ne",
+  "textures": {
+    "texture": "blocks/planks_jungle"
+  }
+}

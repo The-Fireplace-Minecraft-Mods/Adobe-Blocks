@@ -1,0 +1,6 @@
+{
+  "parent": "adobeblocks:block/beam_nse",
+  "textures": {
+    "texture": "blocks/planks_big_oak"
+  }
+}
