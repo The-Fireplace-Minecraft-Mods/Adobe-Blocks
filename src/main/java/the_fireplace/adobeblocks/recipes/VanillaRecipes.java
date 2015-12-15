@@ -14,12 +14,18 @@ public class VanillaRecipes {
 	static ItemStack furnaceStack = new ItemStack(Blocks.furnace);
 	static ItemStack glassStack = new ItemStack(Blocks.glass);
 	static ItemStack stoneStack = new ItemStack(Blocks.stone);
+	static ItemStack oakSlabStack = new ItemStack(Blocks.wooden_slab, 1, 0);
+	static ItemStack birchSlabStack = new ItemStack(Blocks.wooden_slab, 1, 2);
+	static ItemStack spruceSlabStack = new ItemStack(Blocks.wooden_slab, 1, 1);
+	static ItemStack jungleSlabStack = new ItemStack(Blocks.wooden_slab, 1, 3);
+	static ItemStack acaciaSlabStack = new ItemStack(Blocks.wooden_slab, 1, 4);
+	static ItemStack darkOakSlabStack = new ItemStack(Blocks.wooden_slab, 1, 5);
 
 	static ItemStack adobeBrickStack = new ItemStack(AdobeBlocks.adobe_brick);
 	static ItemStack adobeBricksStack = new ItemStack(AdobeBlocks.adobe_bricks);
 	static ItemStack adobeTileStack = new ItemStack(AdobeBlocks.adobe_tile);
 	static ItemStack adobeMixtureBlockStack = new ItemStack(AdobeBlocks.adobe_mixture_block);
-	static ItemStack adobeDoorStack = new ItemStack(AdobeBlocks.adobe_door);
+	//static ItemStack adobeDoorStack = new ItemStack(AdobeBlocks.adobe_door);
 	static ItemStack adobeDoorStack3 = new ItemStack(AdobeBlocks.adobe_door, 3);
 	static ItemStack adobeFurnaceStack = new ItemStack(AdobeBlocks.adobe_furnace);
 	static ItemStack adobeGlassStack = new ItemStack(AdobeBlocks.adobe_glass);
@@ -28,7 +34,7 @@ public class VanillaRecipes {
 	static ItemStack adobeMixStack = new ItemStack(AdobeBlocks.adobe_mixture);
 	static ItemStack adobeMixStack9 = new ItemStack(AdobeBlocks.adobe_mixture, 9);
 	static ItemStack adobeMixStack32 = new ItemStack(AdobeBlocks.adobe_mixture, 32);
-	static ItemStack adobeSlabStack = new ItemStack(AdobeBlocks.adobe_slab);
+	//static ItemStack adobeSlabStack = new ItemStack(AdobeBlocks.adobe_slab);
 	static ItemStack adobeSlabStack6 = new ItemStack(AdobeBlocks.adobe_slab, 6);
 	static ItemStack adobeStairsStack4 = new ItemStack(AdobeBlocks.adobe_stairs, 4);
 	static ItemStack adobeWallStack6 = new ItemStack(AdobeBlocks.adobe_wall, 6);
@@ -39,6 +45,18 @@ public class VanillaRecipes {
 	static ItemStack adobePickaxeStack = new ItemStack(AdobeBlocks.adobe_pickaxe);
 	static ItemStack adobeShovelStack = new ItemStack(AdobeBlocks.adobe_shovel);
 	static ItemStack adobeHoeStack = new ItemStack(AdobeBlocks.adobe_hoe);
+	//static ItemStack oakBeamStack = new ItemStack(AdobeBlocks.oak_beam);
+	//static ItemStack birchBeamStack = new ItemStack(AdobeBlocks.birch_beam);
+	//static ItemStack spruceBeamStack = new ItemStack(AdobeBlocks.spruce_beam);
+	//static ItemStack jungleBeamStack = new ItemStack(AdobeBlocks.jungle_beam);
+	//static ItemStack darkOakBeamStack = new ItemStack(AdobeBlocks.dark_oak_beam);
+	//static ItemStack acaciaBeamStack = new ItemStack(AdobeBlocks.acacia_beam);
+	static ItemStack oakBeamStack2 = new ItemStack(AdobeBlocks.oak_beam, 2);
+	static ItemStack birchBeamStack2 = new ItemStack(AdobeBlocks.birch_beam, 2);
+	static ItemStack spruceBeamStack2 = new ItemStack(AdobeBlocks.spruce_beam, 2);
+	static ItemStack jungleBeamStack2 = new ItemStack(AdobeBlocks.jungle_beam, 2);
+	static ItemStack darkOakBeamStack2 = new ItemStack(AdobeBlocks.dark_oak_beam, 2);
+	static ItemStack acaciaBeamStack2 = new ItemStack(AdobeBlocks.acacia_beam, 2);
 	static ItemStack throwingStoneStack2 = new ItemStack(AdobeBlocks.throwing_stone);
 
 	public static void initRecipes() {
@@ -64,6 +82,12 @@ public class VanillaRecipes {
 		GameRegistry.addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneStickStack);
 		GameRegistry.addRecipe(adobeDoorStack3, "bb", "bb", "bb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobePaneStack16, "ggg", "ggg", 'g', adobeGlassStack);
+		GameRegistry.addShapelessRecipe(oakBeamStack2, oakSlabStack);
+		GameRegistry.addShapelessRecipe(birchBeamStack2, birchSlabStack);
+		GameRegistry.addShapelessRecipe(spruceBeamStack2, spruceSlabStack);
+		GameRegistry.addShapelessRecipe(jungleBeamStack2, jungleSlabStack);
+		GameRegistry.addShapelessRecipe(acaciaBeamStack2, acaciaSlabStack);
+		GameRegistry.addShapelessRecipe(darkOakBeamStack2, darkOakSlabStack);
 
 		GameRegistry.addSmelting(adobeMixStack, adobeBrickStack, 0.3F);
 	}
