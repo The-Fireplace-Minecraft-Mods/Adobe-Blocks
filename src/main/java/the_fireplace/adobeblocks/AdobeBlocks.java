@@ -28,15 +28,15 @@ import the_fireplace.adobeblocks.items.*;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
-@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, version = AdobeBlocks.VERSION)
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME)
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks 2";
-	public static final String VERSION = "3.0.1.0";
-	public static final String downloadURL = "http://goo.gl/bYlW4b";
+	public static String VERSION = "3.0.2";
+	public static final String curseCode = "236104-adobe-blocks-2";
 
 	@SidedProxy(clientSide = "the_fireplace.adobeblocks.proxy.ClientProxy", serverSide = "the_fireplace.adobeblocks.proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -77,6 +77,11 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		String[] version = event.getModMetadata().version.split("\\.");
+		if(version[3].equals("BUILDNUMBER"))//Dev environment
+			VERSION += ".9001";
+		else//Released build
+			VERSION += "."+version[3];
 		AdobeSlab doubleSlab = new AdobeDoubleSlab();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
@@ -161,6 +166,4 @@ public class AdobeBlocks {
 	private void registerBlock(Block block) {
 		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
-
-	public static final String LATEST = "https://dl.dropboxusercontent.com/s/8sdl3cynu7345k4/release.version?dl=0";
 }

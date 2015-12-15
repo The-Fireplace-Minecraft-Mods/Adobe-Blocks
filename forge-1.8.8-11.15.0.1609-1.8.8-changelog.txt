@@ -1,5 +1,117 @@
 Changelog:
-Build 1579:
+Build 1609:
+	cpw: Add a flag to the modidremapping event. If the remapevent is because the registry is refreezing, it'll be true.
+
+Build 1.8.8-11.15.0.1608-1.8.8:
+	cpw: Clean up chunk patch.
+
+Build 1.8.8-11.15.0.1607-1.8.8:
+	mark.a.woodman:
+		Initialize sources list
+		
+		Fixes crash NPE thrown by addFile()
+
+Build 1.8.8-11.15.0.1606-1.8.8:
+	cpw: Most requested feature of all time? TileEntity init method called after it's ready to roll. remove all the if (firstTicks)
+
+Build 1.8.8-11.15.0.1605-1.8.8:
+	cpw:
+		Fix language adapter loading.
+		
+		The language adapter is now properly picked up after the mod is loaded
+		on the classpath, fixing the ClassNotFoundException occurring before.
+		Also fixed some minor formatting and made it throw a full
+		RuntimeException on failure.
+		
+		Fix up some formatting
+
+Build 1.8.8-11.15.0.1604-1.8.8:
+	cpw: Be noisy when API is in a coremod. It'll never work and modders should realize that fact.
+
+Build 1.8.8-11.15.0.1603-1.8.8:
+	tehgeek: Allow server to access Potion isBadEffect()
+
+Build 1.8.8-11.15.0.1602-1.8.8:
+	kashike: Use the FMLSecurityManager checkPermission(Permission) method for context-based permission checks. Fixes #2067
+
+Build 1.8.8-11.15.0.1601-1.8.8:
+	cpw: Allow entity selectors to select "." in entity names. Closes #2125
+
+Build 1.8.8-11.15.0.1600-1.8.8:
+	minecrell: Add jline-based console with colors and tab-completion
+	bernhard.bonigl: Add a PotionRegistry to handle dynamic distribution and remapping of Potion IDs
+	cpw: Some tweaks - GameRegistry is modder facing API, so avoid having MC methods there. Fix a couple of registry bugs.
+	cpw: Fixup Jline integration
+	cpw: A few fixes
+
+Build 1.8.8-11.15.0.1596-1.8.8:
+	cpw: Fix problem with spam from registry on loading a second world. Empty the staging.
+
+Build 1.8.8-11.15.0.1595-1.8.8:
+	lumien231: Fixed: The Integrated Server not being stopped when exiting a singleplayer world to the main menu
+
+Build 1.8.8-11.15.0.1594-1.8.8:
+	LexManos: Add chunk loading protection to WorldSever.getTileEntitiesIn, may prevent orphanced chunks and a CME in EntityPlayerMP. Note: The 'max' parameters are NON-inclusive.
+	cpw: Fix up blockstate rebuild. Closes #2221. Also fix formatting. IDEA has differences. Solved now.
+
+Build 1.8.8-11.15.0.1592-1.8.8:
+	cpw: Giant registry fixup
+
+Build 1.8.8-11.15.0.1591-1.8.8:
+	LexManos: Bump version for new Minecraft version.
+	LexManos: Fixed placing blocks on snow layers with more then one layer.
+	LexManos: Fixed Large mushrooms generating incorrectly.
+	LexManos: Removed IItemRenderer class, all functionality is possible with new rendering system.
+	LexManos: Compiler warnings pass, undeprecated SplashProgress related stuff.
+
+Build 1.8.8-11.14.4.1590-1.8.8:
+	cpw: Propogate AbortException. Closes #2206. Also fix tracing printstream when printStackTrace is called.
+
+Build 1.8.8-11.14.4.1589-1.8.8:
+	cpw: Fix up a couple of patches, affected by the recent update
+	cpw:
+		Add .exc for StatList patch
+		
+		More tweaking
+
+Build 1.8.8-11.14.4.1588-1.8.8:
+	cpw: Fix button and lever placement problem. Closes #2204
+
+Build 1.8.8-11.14.4.1587-1.8.8:
+	lordillyohs:
+		Remove trailing */ in the build.gradle
+		
+		Signed-off-by: Anthony Anderson <lordillyohs@gmail.com>
+
+Build 1.8.8-11.14.4.1586-1.8.8:
+	cpw: Cleaning up some derpy names
+	cpw: More cleanups, some documentation, a bunch of deprecations.
+
+Build 1.8.8-11.14.4.1585-1.8.8:
+	cpw: Deprecate it as well, because hey, it's redundant now.
+	cpw: Clean up some very long dead code. Bukkit hasn't existed in a very long time now. IASM never worked, and I'm not about to implement it.
+
+Build 1.8.8-11.14.4.1584-1.8.8:
+	cpw: ONE EVENT BUS TO RULE THEM ALL AND IN THE DARKNESS FIRE THEM!
+
+Build 1.8.8-11.14.4.1583-1.8.8:
+	cpw: Fix MDK for 1.8.8 using FG2.1 snapshot
+	cpw: Yeah, amount is NOT deprecated.
+
+Build 1.8.8-11.14.4.1582-1.8.8:
+	cpw:
+		OMG! Documentation? WUT? I haz lost my mind.
+		Also, Functional interface for IMC. Senders can send a classname implementing Guava's function, and receivers
+		will be able to get that function, and do, well, whatever, really. Probably best for those callback type
+		scenarios, connecting up APIs and stuffs.
+
+Build 1.8.8-11.14.4.1581-1.8.8:
+	cpw: Cleanup Fluid deprecations stuff.
+
+Build 1.8.8-11.14.4.1580-1.8.8:
+	LexManos: Update universal manifest for 1.8.8's json.
+
+Build 1.8.8-11.14.4.1579-1.8.8:
 	fry: Fixed NPE is B3D loader caused by the missing vertex normal; updated the example chest model - it's now has 2 meshes; Updated ModelAnimationDebug - it now uses the new chest model, renders the base with the static world renderer, and only the lid with the TESR.
 	LexManos: Fix incorrect position passes to Block.getExplosionResistance from entities.
 	LexManos: Moved client side Block.onBlockDestroyed to after Item.onBlockDestroyed to match server order.
