@@ -139,7 +139,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	@Override
 	public boolean hasCustomName() {
-		return this.furnaceCustomName != null && this.furnaceCustomName.length() > 0;
+		return this.furnaceCustomName != null && !this.furnaceCustomName.isEmpty();
 	}
 
 	public void setCustomInventoryName(String p_145951_1_) {
@@ -373,7 +373,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -389,12 +389,12 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return index == 2 ? false : (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
+		return index != 2 && (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
 	}
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
+		return side == EnumFacing.DOWN ? slotsBottom : side == EnumFacing.UP ? slotsTop : slotsSides;
 	}
 
 	/**

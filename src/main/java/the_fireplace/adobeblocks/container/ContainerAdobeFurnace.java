@@ -14,6 +14,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("ObjectAllocationInLoop")
 public class ContainerAdobeFurnace extends Container {
 	private final IInventory tileFurnace;
 	private int field_178152_f;
@@ -56,8 +57,8 @@ public class ContainerAdobeFurnace extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+		for (ICrafting crafter : this.crafters) {
+			ICrafting icrafting = (ICrafting) crafter;
 
 			if (this.field_178152_f != this.tileFurnace.getField(2)) {
 				icrafting.sendProgressBarUpdate(this, 2, this.tileFurnace.getField(2));

@@ -35,7 +35,7 @@ public class AdobeBlocks {
 
 	public static final String MODID = "adobeblocks";
 	public static final String MODNAME = "Adobe Blocks 2";
-	public static String VERSION = "3.0.2";
+	public static String VERSION;
 	public static final String curseCode = "236104-adobe-blocks-2";
 
 	@SidedProxy(clientSide = "the_fireplace.adobeblocks.proxy.ClientProxy", serverSide = "the_fireplace.adobeblocks.proxy.CommonProxy")
@@ -79,9 +79,9 @@ public class AdobeBlocks {
 	public void preInit(FMLPreInitializationEvent event) {
 		String[] version = event.getModMetadata().version.split("\\.");
 		if(version[3].equals("BUILDNUMBER"))//Dev environment
-			VERSION += ".9001";
+			VERSION = event.getModMetadata().version.replace("BUILDNUMBER", "9001");
 		else//Released build
-			VERSION += "."+version[3];
+			VERSION = event.getModMetadata().version;
 		AdobeSlab doubleSlab = new AdobeDoubleSlab();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
@@ -124,9 +124,8 @@ public class AdobeBlocks {
 		BlockDispenser.dispenseBehaviorRegistry.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
 		proxy.registerRenderers();
-		if (event.getSide().isClient()) {
+		if (event.getSide().isClient())
 			registerItemRenders();
-		}
 	}
 
 	private void registerItemRenders() {

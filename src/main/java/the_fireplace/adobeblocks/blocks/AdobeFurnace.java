@@ -252,25 +252,21 @@ public class AdobeFurnace extends BlockContainer {
 			try {
 				FACING_LOOKUP[EnumFacing.WEST.ordinal()] = 1;
 			} catch (NoSuchFieldError var4) {
-				;
 			}
 
 			try {
 				FACING_LOOKUP[EnumFacing.EAST.ordinal()] = 2;
 			} catch (NoSuchFieldError var3) {
-				;
 			}
 
 			try {
 				FACING_LOOKUP[EnumFacing.NORTH.ordinal()] = 3;
 			} catch (NoSuchFieldError var2) {
-				;
 			}
 
 			try {
 				FACING_LOOKUP[EnumFacing.SOUTH.ordinal()] = 4;
 			} catch (NoSuchFieldError var1) {
-				;
 			}
 		}
 	}

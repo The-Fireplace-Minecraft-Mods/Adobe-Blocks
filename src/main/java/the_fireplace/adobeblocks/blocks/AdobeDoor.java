@@ -1,7 +1,5 @@
 package the_fireplace.adobeblocks.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.properties.IProperty;
@@ -12,18 +10,14 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
+
+import java.util.Random;
 
 public class AdobeDoor extends Block {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -34,7 +28,7 @@ public class AdobeDoor extends Block {
 
 	public AdobeDoor() {
 		super(AdobeBlocks.adobe);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HINGE, BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, false).withProperty(HINGE, BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, false).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));
 		this.setUnlocalizedName("adobe_door");
 	}
 
@@ -126,7 +120,7 @@ public class AdobeDoor extends Block {
 			state = iblockstate1.cycleProperty(OPEN);
 			worldIn.setBlockState(blockpos1, state, 2);
 			worldIn.markBlockRangeForRenderUpdate(blockpos1, pos);
-			worldIn.playAuxSFXAtEntity(playerIn, ((Boolean) state.getValue(OPEN)).booleanValue() ? 1003 : 1006, pos, 0);
+			worldIn.playAuxSFXAtEntity(playerIn, (Boolean) state.getValue(OPEN) ? 1003 : 1006, pos, 0);
 			return true;
 		}
 	}
@@ -138,8 +132,8 @@ public class AdobeDoor extends Block {
 			BlockPos blockpos1 = iblockstate.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
 			IBlockState iblockstate1 = pos == blockpos1 ? iblockstate : worldIn.getBlockState(blockpos1);
 
-			if (iblockstate1.getBlock() == this && ((Boolean) iblockstate1.getValue(OPEN)).booleanValue() != open) {
-				worldIn.setBlockState(blockpos1, iblockstate1.withProperty(OPEN, Boolean.valueOf(open)), 2);
+			if (iblockstate1.getBlock() == this && (Boolean) iblockstate1.getValue(OPEN) != open) {
+				worldIn.setBlockState(blockpos1, iblockstate1.withProperty(OPEN, open), 2);
 				worldIn.markBlockRangeForRenderUpdate(blockpos1, pos);
 				worldIn.playAuxSFXAtEntity((EntityPlayer) null, open ? 1003 : 1006, pos, 0);
 			}
@@ -186,11 +180,11 @@ public class AdobeDoor extends Block {
 			} else {
 				boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(blockpos2);
 
-				if ((flag || neighborBlock.canProvidePower()) && neighborBlock != this && flag != ((Boolean) iblockstate2.getValue(POWERED)).booleanValue()) {
-					worldIn.setBlockState(blockpos2, iblockstate2.withProperty(POWERED, Boolean.valueOf(flag)), 2);
+				if ((flag || neighborBlock.canProvidePower()) && neighborBlock != this && flag != (Boolean) iblockstate2.getValue(POWERED)) {
+					worldIn.setBlockState(blockpos2, iblockstate2.withProperty(POWERED, flag), 2);
 
-					if (flag != ((Boolean) state.getValue(OPEN)).booleanValue()) {
-						worldIn.setBlockState(pos, state.withProperty(OPEN, Boolean.valueOf(flag)), 2);
+					if (flag != (Boolean) state.getValue(OPEN)) {
+						worldIn.setBlockState(pos, state.withProperty(OPEN, flag), 2);
 						worldIn.markBlockRangeForRenderUpdate(pos, pos);
 						worldIn.playAuxSFXAtEntity((EntityPlayer) null, flag ? 1003 : 1006, pos, 0);
 					}
@@ -223,7 +217,7 @@ public class AdobeDoor extends Block {
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return pos.getY() >= worldIn.getHeight() - 1 ? false : World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up());
+		return pos.getY() < worldIn.getHeight() - 1 && (World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up()));
 	}
 
 	@Override
@@ -291,7 +285,7 @@ public class AdobeDoor extends Block {
 	 */
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.UPPER).withProperty(HINGE, (meta & 1) > 0 ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf((meta & 2) > 0)) : this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER).withProperty(FACING, EnumFacing.getHorizontal(meta & 3).rotateYCCW()).withProperty(OPEN, Boolean.valueOf((meta & 4) > 0));
+		return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.UPPER).withProperty(HINGE, (meta & 1) > 0 ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT).withProperty(POWERED, (meta & 2) > 0) : this.getDefaultState().withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER).withProperty(FACING, EnumFacing.getHorizontal(meta & 3).rotateYCCW()).withProperty(OPEN, (meta & 4) > 0);
 	}
 
 	@Override
@@ -315,13 +309,13 @@ public class AdobeDoor extends Block {
 				i |= 1;
 			}
 
-			if (((Boolean) state.getValue(POWERED)).booleanValue()) {
+			if ((Boolean) state.getValue(POWERED)) {
 				i |= 2;
 			}
 		} else {
 			i = b0 | ((EnumFacing) state.getValue(FACING)).rotateY().getHorizontalIndex();
 
-			if (((Boolean) state.getValue(OPEN)).booleanValue()) {
+			if ((Boolean) state.getValue(OPEN)) {
 				i |= 4;
 			}
 		}
@@ -362,7 +356,7 @@ public class AdobeDoor extends Block {
 		return new BlockState(this, new IProperty[]{HALF, FACING, OPEN, HINGE, POWERED});
 	}
 
-	public static enum EnumDoorHalf implements IStringSerializable {
+	public enum EnumDoorHalf implements IStringSerializable {
 		UPPER,
 		LOWER;
 
@@ -377,7 +371,7 @@ public class AdobeDoor extends Block {
 		}
 	}
 
-	public static enum EnumHingePosition implements IStringSerializable {
+	public enum EnumHingePosition implements IStringSerializable {
 		LEFT,
 		RIGHT;
 

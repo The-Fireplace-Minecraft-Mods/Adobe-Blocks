@@ -3,8 +3,8 @@
   "modid": "adobeblocks",
   "name": "Adobe Blocks",
   "description": "Adds adobe blocks and other stuff of adobe",
-  "version": "3.0.2.BUILDNUMBER",
-  "mcversion": "1.8.8",
+  "version": "4.0.1.BUILDNUMBER",
+  "mcversion": "1.8.9",
   "url": "http://goo.gl/bYlW4b",
   "updateUrl": "http://goo.gl/bYlW4b",
   "authorList": ["The_Fireplace"],
@@ -12,7 +12,7 @@
   "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": [],
-  "requiredMods": ["Forge@[11.14.4.1579,)"],
+  "requiredMods": ["Forge@[11.15.0.1673,)"],
   "dependants": [],
   "useDependencyInformation": true
 }

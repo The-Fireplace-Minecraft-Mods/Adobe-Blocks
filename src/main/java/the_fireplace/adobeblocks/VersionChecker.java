@@ -139,7 +139,7 @@ public class VersionChecker implements IModGuiFactory {
 
 	@SubscribeEvent
 	public void onPlayerJoinClient(final ClientConnectedToServerEvent event){
-		(new Thread(){
+		new Thread(){
 			@Override
 			public void run(){
 				while(FMLClientHandler.instance().getClientPlayerEntity() == null)
@@ -150,7 +150,7 @@ public class VersionChecker implements IModGuiFactory {
 					}
 				tryNotifyClient(FMLClientHandler.instance().getClientPlayerEntity());
 			}
-		}).start();
+		}.start();
 	}
 
 	@SubscribeEvent

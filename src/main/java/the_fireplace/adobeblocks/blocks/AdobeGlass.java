@@ -1,16 +1,18 @@
 package the_fireplace.adobeblocks.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
+
+import java.util.Random;
 
 public class AdobeGlass extends Block {
 
@@ -40,7 +42,7 @@ public class AdobeGlass extends Block {
 	}
 
 	@Override
-	protected boolean canSilkHarvest() {
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 		return true;
 	}
 
@@ -59,10 +61,7 @@ public class AdobeGlass extends Block {
 			return true;
 		}
 
-		if (block == this) {
-			return false;
-		}
+		return block != this;
 
-		return true;
 	}
 }
