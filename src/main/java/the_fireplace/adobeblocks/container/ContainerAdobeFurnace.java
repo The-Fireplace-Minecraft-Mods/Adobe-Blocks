@@ -47,7 +47,7 @@ public class ContainerAdobeFurnace extends Container {
 	@Override
 	public void onCraftGuiOpened(ICrafting listener) {
 		super.onCraftGuiOpened(listener);
-		listener.func_175173_a(this, this.tileFurnace);
+		listener.sendAllWindowProperties(this, this.tileFurnace);
 	}
 
 	/**

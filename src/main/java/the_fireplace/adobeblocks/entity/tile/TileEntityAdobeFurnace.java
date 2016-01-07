@@ -97,7 +97,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 * like when you close a workbench GUI.
 	 */
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index) {
+	public ItemStack removeStackFromSlot(int index) {
 		if (this.furnaceItemStacks[index] != null) {
 			ItemStack itemstack = this.furnaceItemStacks[index];
 			this.furnaceItemStacks[index] = null;
@@ -130,7 +130,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 * Gets the name of this command sender (usually username, but possibly "Rcon")
 	 */
 	@Override
-	public String getCommandSenderName() {
+	public String getName() {
 		return this.hasCustomName() ? this.furnaceCustomName : "tile.adobe_furnace.name";
 	}
 

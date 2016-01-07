@@ -41,7 +41,7 @@ public class RenderThrowingStone extends Render {
 		GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 		this.bindTexture(TextureMap.locationBlocksTexture);
-		this.ri.func_181564_a(this.func_177082_d(entity), ItemCameraTransforms.TransformType.GROUND);
+		this.ri.renderItem(this.func_177082_d(entity), ItemCameraTransforms.TransformType.GROUND);
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
 		super.doRender(entity, x, y, z, p_76986_8_, partialTicks);
