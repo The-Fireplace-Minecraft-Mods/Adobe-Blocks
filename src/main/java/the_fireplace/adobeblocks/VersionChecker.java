@@ -238,7 +238,7 @@ public class VersionChecker implements IModGuiFactory {
 				BufferedReader in = new BufferedReader(new FileReader(file));
 				String contents = in.readLine();
 				int jarindex = contents.indexOf("AdobeBlocks-");
-				int versionindex = jarindex + HostMODNAME.replace(" ", "").length()+1;
+				int versionindex = jarindex + "AdobeBlocks-".length();
 				int dotjarindex = contents.indexOf(".jar", versionindex);
 				String versionnumber = contents.substring(versionindex, dotjarindex);
 				in.close();
