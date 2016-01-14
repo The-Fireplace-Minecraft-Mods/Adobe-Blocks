@@ -36,7 +36,7 @@ group= "the_fireplace.adobeblocks"
 archivesBaseName = "AdobeBlocks"
 
 minecraft {
-    version = "1.8.9-11.15.0.1673"
+    version = "1.8.9-11.15.0.1697"
     runDir = "run"
     mappings = "stable_20"
 }
