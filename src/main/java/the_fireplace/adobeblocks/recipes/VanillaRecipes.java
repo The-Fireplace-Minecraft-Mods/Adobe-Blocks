@@ -23,7 +23,8 @@ public class VanillaRecipes {
 
 	static ItemStack adobeBrickStack = new ItemStack(AdobeBlocks.adobe_brick);
 	static ItemStack adobeBricksStack = new ItemStack(AdobeBlocks.adobe_bricks);
-	static ItemStack adobeTileStack = new ItemStack(AdobeBlocks.adobe_tile);
+	//static ItemStack adobeTileStack = new ItemStack(AdobeBlocks.adobe_tile);
+	static ItemStack adobeTileStack4 = new ItemStack(AdobeBlocks.adobe_tile, 4);
 	static ItemStack adobeMixtureBlockStack = new ItemStack(AdobeBlocks.adobe_mixture_block);
 	//static ItemStack adobeDoorStack = new ItemStack(AdobeBlocks.adobe_door);
 	static ItemStack adobeDoorStack3 = new ItemStack(AdobeBlocks.adobe_door, 3);
@@ -63,7 +64,7 @@ public class VanillaRecipes {
 		GameRegistry.addShapelessRecipe(throwingStoneStack2, adobeBrickStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack9, adobeMixtureBlockStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack32, waterStack, dirtStack, dirtStack, dirtStack, dirtStack, sandStack, sandStack, sandStack, sandStack);
-		GameRegistry.addRecipe(adobeTileStack, "i", "b", 'b', adobeBricksStack, 'i', adobeBrickStack);
+		GameRegistry.addRecipe(adobeTileStack4, "iii", "bbb", 'b', adobeBricksStack, 'i', adobeBrickStack);
 		GameRegistry.addRecipe(adobeMixtureBlockStack, "mmm", "mmm", "mmm", 'm', adobeMixStack);
 		GameRegistry.addRecipe(adobeBricksStack, "bb", "bb", 'b', adobeBrickStack);
 		GameRegistry.addRecipe(adobeFurnaceStack, "bbb", "bfb", "bbb", 'b', adobeBricksStack, 'f', furnaceStack);
