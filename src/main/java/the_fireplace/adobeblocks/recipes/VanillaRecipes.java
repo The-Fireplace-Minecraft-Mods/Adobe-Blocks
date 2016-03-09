@@ -35,6 +35,7 @@ public class VanillaRecipes {
 	static ItemStack adobeMixStack = new ItemStack(AdobeBlocks.adobe_mixture);
 	static ItemStack adobeMixStack9 = new ItemStack(AdobeBlocks.adobe_mixture, 9);
 	static ItemStack adobeMixStack32 = new ItemStack(AdobeBlocks.adobe_mixture, 32);
+	static ItemStack adobeMixStack33 = new ItemStack(AdobeBlocks.adobe_mixture, 33);
 	//static ItemStack adobeSlabStack = new ItemStack(AdobeBlocks.adobe_slab);
 	static ItemStack adobeSlabStack6 = new ItemStack(AdobeBlocks.adobe_slab, 6);
 	static ItemStack adobeStairsStack4 = new ItemStack(AdobeBlocks.adobe_stairs, 4);
@@ -59,11 +60,15 @@ public class VanillaRecipes {
 	static ItemStack darkOakBeamStack2 = new ItemStack(AdobeBlocks.dark_oak_beam, 2);
 	static ItemStack acaciaBeamStack2 = new ItemStack(AdobeBlocks.acacia_beam, 2);
 	static ItemStack throwingStoneStack2 = new ItemStack(AdobeBlocks.throwing_stone);
+	static ItemStack capsuleStack = new ItemStack(AdobeBlocks.adobe_capsule);
+	static ItemStack capsuleStack4 = new ItemStack(AdobeBlocks.adobe_capsule, 4);
+	static ItemStack filledCapsuleStack = new ItemStack(AdobeBlocks.filled_adobe_capsule);
 
 	public static void initRecipes() {
 		GameRegistry.addShapelessRecipe(throwingStoneStack2, adobeBrickStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack9, adobeMixtureBlockStack);
 		GameRegistry.addShapelessRecipe(adobeMixStack32, waterStack, dirtStack, dirtStack, dirtStack, dirtStack, sandStack, sandStack, sandStack, sandStack);
+		GameRegistry.addShapelessRecipe(adobeMixStack33, filledCapsuleStack, dirtStack, dirtStack, dirtStack, dirtStack, sandStack, sandStack, sandStack, sandStack);
 		GameRegistry.addRecipe(adobeTileStack4, "iii", "bbb", 'b', adobeBricksStack, 'i', adobeBrickStack);
 		GameRegistry.addRecipe(adobeMixtureBlockStack, "mmm", "mmm", "mmm", 'm', adobeMixStack);
 		GameRegistry.addRecipe(adobeBricksStack, "bb", "bb", 'b', adobeBrickStack);
@@ -83,6 +88,7 @@ public class VanillaRecipes {
 		GameRegistry.addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneStickStack);
 		GameRegistry.addRecipe(adobeDoorStack3, "bb", "bb", "bb", 'b', adobeBricksStack);
 		GameRegistry.addRecipe(adobePaneStack16, "ggg", "ggg", 'g', adobeGlassStack);
+		GameRegistry.addRecipe(capsuleStack4, " a ", "a a", " a ", 'a', adobeMixStack);
 		GameRegistry.addShapelessRecipe(oakBeamStack2, oakSlabStack);
 		GameRegistry.addShapelessRecipe(birchBeamStack2, birchSlabStack);
 		GameRegistry.addShapelessRecipe(spruceBeamStack2, spruceSlabStack);

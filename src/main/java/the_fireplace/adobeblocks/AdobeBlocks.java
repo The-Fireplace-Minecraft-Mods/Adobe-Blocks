@@ -2,13 +2,20 @@ package the_fireplace.adobeblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -69,6 +76,23 @@ public class AdobeBlocks {
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
 	public static final Item stone_stick = new Item().setUnlocalizedName("stone_stick").setCreativeTab(TabAdobeBlocks);
+	public static final Item adobe_capsule = new Item(){
+		@Override
+		public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+			MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, true);
+			if (movingobjectposition == null) return itemStackIn;
+			else{
+				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
+					BlockPos blockpos = movingobjectposition.getBlockPos();
+					if (!worldIn.isBlockModifiable(playerIn, blockpos)) return itemStackIn;
+					if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, itemStackIn)) return itemStackIn;
+					IBlockState iblockstate = worldIn.getBlockState(blockpos);
+					Material material = iblockstate.getBlock().getMaterial();
+					if (material == Material.water && iblockstate.getValue(BlockLiquid.LEVEL).intValue() == 0){
+						worldIn.setBlockToAir(blockpos);
+						return new ItemStack(filled_adobe_capsule);
+					}}} return itemStackIn;}}.setUnlocalizedName("adobe_capsule").setCreativeTab(TabAdobeBlocks);
+	public static final Item filled_adobe_capsule = new Item().setUnlocalizedName("filled_adobe_capsule").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_door = new ItemAdobeDoor(adobe_door_internal);
 	public static final Item adobe_sword = new AdobeSword();
 	public static final Item adobe_pickaxe = new AdobePickaxe();
@@ -112,13 +136,15 @@ public class AdobeBlocks {
 		registerItem(adobe_pickaxe);
 		registerItem(adobe_axe);
 		registerItem(adobe_shovel);
-		registerItem(adobe_hoe);
+		registerItem(adobe_capsule);
+		registerItem(filled_adobe_capsule);
 		registerItem(stone_stick);
 		registerItem(adobe_door);
 		registerItem(throwing_stone);
+		registerItem(adobe_hoe);
 
-		int eid = 0;
-		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", eid++, instance, 64, 10, true);
+		int eid = -1;
+		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
 	}
 
 	@EventHandler
@@ -159,6 +185,8 @@ public class AdobeBlocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID + ":stone_stick", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID + ":adobe_door", "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(throwing_stone, 0, new ModelResourceLocation(MODID + ":adobe_throwing_stone", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_capsule, 0, new ModelResourceLocation(MODID + ":adobe_capsule", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(filled_adobe_capsule, 0, new ModelResourceLocation(MODID + ":filled_adobe_capsule", "inventory"));
 	}
 
 	private void registerItem(Item item) {

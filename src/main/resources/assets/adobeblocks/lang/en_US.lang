@@ -25,4 +25,6 @@ tile.jungle_beam.name=Jungle Crossbeam
 tile.oak_beam.name=Oak Crossbeam
 tile.spruce_beam.name=Spruce Crossbeam
 tile.dark_oak_beam.name=Dark Oak Crossbeam
+item.adobe_capsule.name=Adobe Capsule
+item.filled_adobe_capsule.name=Filled Adobe Capsule
 itemGroup.adobe_blocks=Adobe Blocks
