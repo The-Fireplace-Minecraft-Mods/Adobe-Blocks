@@ -42,7 +42,14 @@ minecraft {
 }
 
 dependencies {
+	deobfCompile group: "mezz.jei", name: "jei_1.8.9", version: "2.19.0.93"
+}
 
+repositories{
+	maven { //JEI
+        name 'DVS1 Maven FS'
+        url "http://dvs1.progwml6.com/files/maven"
+    }
 }
 
 processResources
