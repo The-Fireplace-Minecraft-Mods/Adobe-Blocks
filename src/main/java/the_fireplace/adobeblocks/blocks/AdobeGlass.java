@@ -57,11 +57,7 @@ public class AdobeGlass extends Block {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		Block block = iblockstate.getBlock();
 
-		if (worldIn.getBlockState(pos.offset(side.getOpposite())) != iblockstate) {
-			return true;
-		}
-
-		return block != this;
+		return worldIn.getBlockState(pos.offset(side.getOpposite())) != iblockstate || block != this;
 
 	}
 }

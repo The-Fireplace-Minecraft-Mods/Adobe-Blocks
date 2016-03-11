@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "state=0": {
+      "model": "adobeblocks:after_effects"
+    },
+    "state=1": {
+      "model": "adobeblocks:audition"
+    },
+    "state=2": {
+      "model": "adobeblocks:bridge"
+    },
+    "state=3": {
+      "model": "adobeblocks:dreamweaver"
+    },
+    "state=4": {
+      "model": "adobeblocks:encore"
+    },
+    "state=5": {
+      "model": "adobeblocks:fireworks"
+    },
+    "state=6": {
+      "model": "adobeblocks:flash"
+    },
+    "state=7": {
+      "model": "adobeblocks:flash_builder"
+    },
+    "state=8": {
+      "model": "adobeblocks:illustrator"
+    },
+    "state=9": {
+      "model": "adobeblocks:indesign"
+    },
+    "state=10": {
+      "model": "adobeblocks:lightroom"
+    },
+    "state=11": {
+      "model": "adobeblocks:photoshop"
+    },
+    "state=12": {
+      "model": "adobeblocks:prelude"
+    },
+    "state=13": {
+      "model": "adobeblocks:premier_pro"
+    },
+    "state=14": {
+      "model": "adobeblocks:speedgrade"
+    }
+  }
+}

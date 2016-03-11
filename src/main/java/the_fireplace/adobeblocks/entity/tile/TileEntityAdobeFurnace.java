@@ -389,7 +389,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return index != 2 && (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
+		return index != 2 && (index != 1 || (isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack)));
 	}
 
 	@Override

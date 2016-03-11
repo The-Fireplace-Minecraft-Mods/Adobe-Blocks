@@ -109,7 +109,7 @@ public class AdobeWall extends Block {
 
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
-		return block != Blocks.barrier && (block != this && !(block instanceof BlockFenceGate) ? block.getMaterial().isOpaque() && block.isFullCube() ? block.getMaterial() != Material.gourd : false : true);
+		return block != Blocks.barrier && (!(block != this && !(block instanceof BlockFenceGate)) || (block.getMaterial().isOpaque() && block.isFullCube() ? block.getMaterial() != Material.gourd : false));
 	}
 
 	@Override

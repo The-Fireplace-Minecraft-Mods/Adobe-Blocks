@@ -135,7 +135,7 @@ public class Beam extends Block {
 
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
-		return block != Blocks.barrier && (!(block instanceof Beam) || block.getMaterial() != this.blockMaterial ? block.getMaterial().isOpaque() && block.isFullCube() ? block.getMaterial() != Material.gourd : false : true);
+		return block != Blocks.barrier && (!(!(block instanceof Beam) || block.getMaterial() != this.blockMaterial) || (block.getMaterial().isOpaque() && block.isFullCube() ? block.getMaterial() != Material.gourd : false));
 	}
 
 	@Override
