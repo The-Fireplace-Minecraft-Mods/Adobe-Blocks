@@ -2,9 +2,8 @@ package the_fireplace.adobeblocks.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -22,7 +21,7 @@ public class AdobeBlock extends Block {
 	public static final PropertyInteger STATE = PropertyInteger.create("state", 0, 14);
 
 	public AdobeBlock() {
-		super(Material.wood);
+		super(Material.WOOD);
 		setDefaultState(this.blockState.getBaseState().withProperty(STATE, 0));
 		setUnlocalizedName("adobe_block");
 		setHardness(2.0F);
@@ -40,8 +39,8 @@ public class AdobeBlock extends Block {
 		return state.getValue(STATE);
 	}
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[]{STATE});
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, STATE);
 	}
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List list){

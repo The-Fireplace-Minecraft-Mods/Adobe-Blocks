@@ -2,7 +2,7 @@ package the_fireplace.adobeblocks.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import the_fireplace.adobeblocks.container.ContainerAdobeFurnace;

@@ -6,7 +6,7 @@ import the_fireplace.adobeblocks.AdobeBlocks;
 public class AdobeAxe extends ItemAxe {
 
 	public AdobeAxe() {
-		super(AdobeBlocks.adobeTool);
+		super(AdobeBlocks.adobeTool, 8.0F, -3.2F);
 		setUnlocalizedName("adobe_axe");
 		setCreativeTab(AdobeBlocks.TabAdobeBlocks);
 	}

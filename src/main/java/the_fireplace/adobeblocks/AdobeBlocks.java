@@ -7,15 +7,18 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
@@ -38,7 +41,7 @@ import the_fireplace.adobeblocks.items.*;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
-@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME)
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://caterpillar.bitnamiapp.com/jsons/adobeblocks.json")
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
@@ -54,7 +57,7 @@ public class AdobeBlocks {
 	public static ToolMaterial adobeTool = EnumHelper.addToolMaterial("adobe", 1, 177, 2.0F, 1.0F, 15);
 
 	public static final CreativeTabs TabAdobeBlocks = new TabAdobeBlocks("adobe_blocks");
-	public static final Material adobe = new Material(MapColor.adobeColor);
+	public static final Material adobe = new Material(MapColor.ADOBE);
 
 	public static final Block adobe_mixture_block = new AdobeMixtureBlock();
 	public static final Block adobe_tile = new AdobeTile();
@@ -66,34 +69,41 @@ public class AdobeBlocks {
 	public static final Block adobe_slab = new AdobeHalfSlab();
 	public static final Block adobe_glass = new AdobeGlass();
 	public static final Block adobe_door_internal = new AdobeDoor();
-	public static final Block adobe_glass_pane = new AdobePane(false).setUnlocalizedName("adobe_glass_pane").setHardness(0.3F).setStepSound(Block.soundTypeGlass);
-	public static final Block oak_beam = new Beam(Material.wood).setUnlocalizedName("oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
-	public static final Block birch_beam = new Beam(Material.wood).setUnlocalizedName("birch_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
-	public static final Block spruce_beam = new Beam(Material.wood).setUnlocalizedName("spruce_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
-	public static final Block jungle_beam = new Beam(Material.wood).setUnlocalizedName("jungle_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
-	public static final Block dark_oak_beam = new Beam(Material.wood).setUnlocalizedName("dark_oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
-	public static final Block acacia_beam = new Beam(Material.wood).setUnlocalizedName("acacia_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block adobe_glass_pane = new AdobePane().setUnlocalizedName("adobe_glass_pane").setHardness(0.3F);
+	public static final Block oak_beam = new Beam(Material.WOOD).setUnlocalizedName("oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block birch_beam = new Beam(Material.WOOD).setUnlocalizedName("birch_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block spruce_beam = new Beam(Material.WOOD).setUnlocalizedName("spruce_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block jungle_beam = new Beam(Material.WOOD).setUnlocalizedName("jungle_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block dark_oak_beam = new Beam(Material.WOOD).setUnlocalizedName("dark_oak_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
+	public static final Block acacia_beam = new Beam(Material.WOOD).setUnlocalizedName("acacia_beam").setCreativeTab(AdobeBlocks.TabAdobeBlocks).setHardness(2.0F).setResistance(5.0F);
 	public static final Block adobe_block = new AdobeBlock();
 
 	public static final Item adobe_mixture = new Item().setUnlocalizedName("adobe_mixture").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_brick = new Item().setUnlocalizedName("adobe_brick").setCreativeTab(TabAdobeBlocks);
 	public static final Item stone_stick = new Item().setUnlocalizedName("stone_stick").setCreativeTab(TabAdobeBlocks);
-	public static final Item adobe_capsule = new Item(){
+	public static final Item adobe_capsule = new Item() {
 		@Override
-		public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-			MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, true);
-			if (movingobjectposition == null) return itemStackIn;
-			else{
-				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
+		public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+			RayTraceResult movingobjectposition = this.rayTrace(worldIn, playerIn, true);
+			if (movingobjectposition == null) return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+			else {
+				if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
 					BlockPos blockpos = movingobjectposition.getBlockPos();
-					if (!worldIn.isBlockModifiable(playerIn, blockpos)) return itemStackIn;
-					if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, itemStackIn)) return itemStackIn;
+					if (!worldIn.isBlockModifiable(playerIn, blockpos))
+						return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+					if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, itemStackIn))
+						return new ActionResult(EnumActionResult.FAIL, itemStackIn);
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
-					Material material = iblockstate.getBlock().getMaterial();
-					if (material == Material.water && iblockstate.getValue(BlockLiquid.LEVEL) == 0){
+					Material material = iblockstate.getMaterial();
+					if (material == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
 						worldIn.setBlockToAir(blockpos);
-						return new ItemStack(filled_adobe_capsule);
-					}}} return itemStackIn;}}.setUnlocalizedName("adobe_capsule").setCreativeTab(TabAdobeBlocks);
+						return new ActionResult(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule));
+					}
+				}
+			}
+			return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+		}
+	}.setUnlocalizedName("adobe_capsule").setCreativeTab(TabAdobeBlocks);
 	public static final Item filled_adobe_capsule = new Item().setUnlocalizedName("filled_adobe_capsule").setCreativeTab(TabAdobeBlocks);
 	public static final Item adobe_door = new ItemAdobeDoor(adobe_door_internal);
 	public static final Item adobe_sword = new AdobeSword();
@@ -106,7 +116,7 @@ public class AdobeBlocks {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		String[] version = event.getModMetadata().version.split("\\.");
-		if(version[3].equals("BUILDNUMBER"))//Dev environment
+		if (version[3].equals("BUILDNUMBER"))//Dev environment
 			VERSION = event.getModMetadata().version.replace("BUILDNUMBER", "9001");
 		else//Released build
 			VERSION = event.getModMetadata().version;
@@ -152,7 +162,7 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		BlockDispenser.dispenseBehaviorRegistry.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
+		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
 		proxy.registerRenderers();
 		if (event.getSide().isClient())

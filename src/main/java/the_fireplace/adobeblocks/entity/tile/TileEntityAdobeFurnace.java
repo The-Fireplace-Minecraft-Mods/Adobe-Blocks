@@ -10,19 +10,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.SlotFurnaceFuel;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -172,7 +167,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound) {
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setShort("BurnTime", (short) this.furnaceBurnTime);
 		compound.setShort("CookTime", (short) this.cookTime);
@@ -193,6 +188,8 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 		if (this.hasCustomName()) {
 			compound.setString("CustomName", this.furnaceCustomName);
 		}
+
+		return compound;
 	}
 
 	/**
@@ -308,8 +305,8 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 				this.furnaceItemStacks[2].stackSize += itemstack.stackSize; //Forge BugFix: Results may have multiple items
 			}
 
-			if (this.furnaceItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.sponge) && this.furnaceItemStacks[0].getMetadata() == 1 && this.furnaceItemStacks[1] != null && this.furnaceItemStacks[1].getItem() == Items.bucket) {
-				this.furnaceItemStacks[1] = new ItemStack(Items.water_bucket);
+			if (this.furnaceItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.SPONGE) && this.furnaceItemStacks[0].getMetadata() == 1 && this.furnaceItemStacks[1] != null && this.furnaceItemStacks[1].getItem() == Items.BUCKET) {
+				this.furnaceItemStacks[1] = new ItemStack(Items.WATER_BUCKET);
 			}
 
 			--this.furnaceItemStacks[0].stackSize;
@@ -330,18 +327,18 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 		} else {
 			Item item = stack.getItem();
 
-			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air) {
+			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR) {
 				Block block = Block.getBlockFromItem(item);
 
-				if (block == Blocks.wooden_slab) {
+				if (block == Blocks.WOODEN_SLAB) {
 					return (int) (150 * 0.8F);
 				}
 
-				if (block.getMaterial() == Material.wood) {
+				if (block.getMaterial(block.getDefaultState()) == Material.WOOD) {
 					return (int) (300 * 0.8F);
 				}
 
-				if (block == Blocks.coal_block) {
+				if (block == Blocks.COAL_BLOCK) {
 					return (int) (16000 * 0.8F);
 				}
 			}
@@ -351,11 +348,11 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 			if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD"))
 				return (int) (200 * 0.8F);
 			if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return (int) (200 * 0.8F);
-			if (item == Items.stick) return (int) (100 * 0.8F);
-			if (item == Items.coal) return (int) (1600 * 0.8F);
-			if (item == Items.lava_bucket) return (int) (20000 * 0.8F);
-			if (item == Item.getItemFromBlock(Blocks.sapling)) return (int) (100 * 0.8F);
-			if (item == Items.blaze_rod) return (int) (2400 * 0.8F);
+			if (item == Items.STICK) return (int) (100 * 0.8F);
+			if (item == Items.COAL) return (int) (1600 * 0.8F);
+			if (item == Items.LAVA_BUCKET) return (int) (20000 * 0.8F);
+			if (item == Item.getItemFromBlock(Blocks.SAPLING)) return (int) (100 * 0.8F);
+			if (item == Items.BLAZE_ROD) return (int) (2400 * 0.8F);
 			return (int) (GameRegistry.getFuelValue(stack) * 0.8F);
 		}
 	}
@@ -389,7 +386,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return index != 2 && (index != 1 || (isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack)));
+		return index != 2 && (index != 1 || isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
 	}
 
 	@Override
@@ -415,7 +412,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 		if (direction == EnumFacing.DOWN && index == 1) {
 			Item item = stack.getItem();
 
-			if (item != Items.water_bucket && item != Items.bucket) {
+			if (item != Items.WATER_BUCKET && item != Items.BUCKET) {
 				return false;
 			}
 		}

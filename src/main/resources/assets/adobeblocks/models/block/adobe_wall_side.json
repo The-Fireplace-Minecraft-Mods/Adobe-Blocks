@@ -1,5 +1,5 @@
 {
-  "parent": "block/wall_nsew",
+  "parent": "block/wall_side",
   "textures": {
     "wall": "adobeblocks:blocks/adobe_bricks"
   }

@@ -8,18 +8,18 @@ import net.minecraftforge.oredict.OreDictionary;
 import the_fireplace.adobeblocks.AdobeBlocks;
 
 public class VanillaRecipes {
-	static ItemStack waterStack = new ItemStack(Items.water_bucket);
-	static ItemStack dirtStack = new ItemStack(Blocks.dirt);
-	static ItemStack sandStack = new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE);
-	static ItemStack furnaceStack = new ItemStack(Blocks.furnace);
-	static ItemStack glassStack = new ItemStack(Blocks.glass);
-	static ItemStack stoneStack = new ItemStack(Blocks.stone);
-	static ItemStack oakSlabStack = new ItemStack(Blocks.wooden_slab, 1, 0);
-	static ItemStack birchSlabStack = new ItemStack(Blocks.wooden_slab, 1, 2);
-	static ItemStack spruceSlabStack = new ItemStack(Blocks.wooden_slab, 1, 1);
-	static ItemStack jungleSlabStack = new ItemStack(Blocks.wooden_slab, 1, 3);
-	static ItemStack acaciaSlabStack = new ItemStack(Blocks.wooden_slab, 1, 4);
-	static ItemStack darkOakSlabStack = new ItemStack(Blocks.wooden_slab, 1, 5);
+	static ItemStack waterStack = new ItemStack(Items.WATER_BUCKET);
+	static ItemStack dirtStack = new ItemStack(Blocks.DIRT);
+	static ItemStack sandStack = new ItemStack(Blocks.SAND, 1, OreDictionary.WILDCARD_VALUE);
+	static ItemStack furnaceStack = new ItemStack(Blocks.FURNACE);
+	static ItemStack glassStack = new ItemStack(Blocks.GLASS);
+	static ItemStack stoneStack = new ItemStack(Blocks.STONE);
+	static ItemStack oakSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 0);
+	static ItemStack birchSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 2);
+	static ItemStack spruceSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 1);
+	static ItemStack jungleSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 3);
+	static ItemStack acaciaSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 4);
+	static ItemStack darkOakSlabStack = new ItemStack(Blocks.WOODEN_SLAB, 1, 5);
 
 	static ItemStack adobeBrickStack = new ItemStack(AdobeBlocks.adobe_brick);
 	static ItemStack adobeBricksStack = new ItemStack(AdobeBlocks.adobe_bricks);

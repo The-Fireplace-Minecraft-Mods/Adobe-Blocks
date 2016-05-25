@@ -12,6 +12,5 @@ public class AdobeBricks extends Block {
 		setCreativeTab(AdobeBlocks.TabAdobeBlocks);
 		setHardness(2.0F);
 		setResistance(10.0F);
-		setStepSound(soundTypePiston);
 	}
 }

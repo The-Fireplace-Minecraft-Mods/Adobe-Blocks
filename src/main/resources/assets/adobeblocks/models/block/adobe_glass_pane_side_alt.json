@@ -1,5 +1,5 @@
 {
-  "parent": "block/pane_ne",
+  "parent": "block/pane_side_alt",
   "textures": {
     "edge": "adobeblocks:blocks/adobe_glass_pane_top",
     "pane": "adobeblocks:blocks/adobe_glass"

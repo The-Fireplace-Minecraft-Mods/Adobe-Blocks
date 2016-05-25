@@ -1,7 +1,0 @@
-{
-  "parent": "block/pane_n",
-  "textures": {
-    "edge": "adobeblocks:blocks/adobe_glass_pane_top",
-    "pane": "adobeblocks:blocks/adobe_glass"
-  }
-}

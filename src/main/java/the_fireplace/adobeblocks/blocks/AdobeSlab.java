@@ -1,20 +1,22 @@
 package the_fireplace.adobeblocks.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
+
+import java.util.Random;
 
 public abstract class AdobeSlab extends BlockSlab {
 
@@ -26,7 +28,6 @@ public abstract class AdobeSlab extends BlockSlab {
 			setCreativeTab(AdobeBlocks.TabAdobeBlocks);
 		setHardness(2.0F);
 		setResistance(10.0F);
-		setStepSound(soundTypePiston);
 		setHarvestLevel("pickaxe", 0);
 		this.useNeighborBrightness = !this.isDouble();
 		setUnlocalizedName("adobe_slab");
@@ -45,7 +46,8 @@ public abstract class AdobeSlab extends BlockSlab {
 	}
 
 	@Override
-	public Object getVariant(ItemStack stack) {
+	public Comparable<?> getTypeForItem(ItemStack stack)
+	{
 		return false;
 	}
 
@@ -74,7 +76,7 @@ public abstract class AdobeSlab extends BlockSlab {
 		if (this.isDouble()) {
 			return 0;
 		}
-		if ((EnumBlockHalf) state.getValue(HALF) == EnumBlockHalf.TOP) {
+		if (state.getValue(HALF) == EnumBlockHalf.TOP) {
 			return 8;
 		} else {
 			return 0;
@@ -93,16 +95,16 @@ public abstract class AdobeSlab extends BlockSlab {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public final Item getItem(World world, BlockPos pos) {
-		return getItemFromBlock(innerGetId(false));
+	public final ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(getItemFromBlock(innerGetId(false)));
 	}
 
 	@Override
-	protected final BlockState createBlockState() {
+	protected final BlockStateContainer createBlockState() {
 		if (this.isDouble()) {
-			return new BlockState(this, new IProperty[]{VARIANT_PROPERTY});
+			return new BlockStateContainer(this, VARIANT_PROPERTY);
 		} else {
-			return new BlockState(this, new IProperty[]{VARIANT_PROPERTY, HALF});
+			return new BlockStateContainer(this, VARIANT_PROPERTY, HALF);
 		}
 	}
 

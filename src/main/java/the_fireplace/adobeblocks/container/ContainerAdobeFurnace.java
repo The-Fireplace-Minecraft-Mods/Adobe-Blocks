@@ -2,12 +2,7 @@ package the_fireplace.adobeblocks.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceFuel;
-import net.minecraft.inventory.SlotFurnaceOutput;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -21,7 +16,6 @@ public class ContainerAdobeFurnace extends Container {
 	private int field_178153_g;
 	private int field_178154_h;
 	private int field_178155_i;
-	private static final String __OBFID = "CL_00001748";
 
 	public ContainerAdobeFurnace(InventoryPlayer inv, IInventory furnaceInventory) {
 		this.tileFurnace = furnaceInventory;
@@ -45,8 +39,8 @@ public class ContainerAdobeFurnace extends Container {
 	 * Add the given Listener to the list of Listeners. Method name is for legacy.
 	 */
 	@Override
-	public void onCraftGuiOpened(ICrafting listener) {
-		super.onCraftGuiOpened(listener);
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
 		listener.sendAllWindowProperties(this, this.tileFurnace);
 	}
 
@@ -57,8 +51,8 @@ public class ContainerAdobeFurnace extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (ICrafting crafter : this.crafters) {
-			ICrafting icrafting = (ICrafting) crafter;
+		for (IContainerListener crafter : this.listeners) {
+			IContainerListener icrafting = crafter;
 
 			if (this.field_178152_f != this.tileFurnace.getField(2)) {
 				icrafting.sendProgressBarUpdate(this, 2, this.tileFurnace.getField(2));
@@ -100,7 +94,7 @@ public class ContainerAdobeFurnace extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(index);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
@@ -133,7 +127,7 @@ public class ContainerAdobeFurnace extends Container {
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();
 			}
