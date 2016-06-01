@@ -96,8 +96,7 @@ public class AdobeBlocks {
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 					Material material = iblockstate.getMaterial();
 					if (material == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
-						worldIn.setBlockToAir(blockpos);
-						return new ActionResult(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule));
+						return new ActionResult(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule, itemStackIn.stackSize));
 					}
 				}
 			}
