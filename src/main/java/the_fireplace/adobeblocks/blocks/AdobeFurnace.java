@@ -36,6 +36,9 @@ public class AdobeFurnace extends BlockContainer {
 		super(Material.ROCK);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.isBurning = isBurning;
+		setHarvestLevel("pickaxe", 0);
+		setHardness(2.0F);
+		setResistance(10.0F);
 	}
 
 	/**
