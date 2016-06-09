@@ -1,7 +1,14 @@
 package the_fireplace.adobeblocks.blocks;
 
 import net.minecraft.block.BlockWall;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
+
+import java.util.List;
 
 public class AdobeWall extends BlockWall {
 
@@ -12,5 +19,12 @@ public class AdobeWall extends BlockWall {
 		this.setResistance(10.0F / 3.0F);
 		this.setCreativeTab(AdobeBlocks.TabAdobeBlocks);
 		setUnlocalizedName("adobe_wall");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	{
+		list.add(new ItemStack(itemIn));
 	}
 }
