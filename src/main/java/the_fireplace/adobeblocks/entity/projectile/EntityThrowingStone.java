@@ -26,13 +26,13 @@ public class EntityThrowingStone extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult mop) {
 		if (mop.entityHit != null) {
-			byte b0 = 2;
+			byte damage = 2;
 
 			if (mop.entityHit instanceof EntitySkeleton) {
-				b0 = 3;
+				damage = 3;
 			}
 
-			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), b0);
+			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), damage);
 		}
 
 		if (!this.worldObj.isRemote) {

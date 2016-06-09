@@ -30,7 +30,9 @@ public class ThrowingStone extends Item {
 		worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		if (!worldIn.isRemote) {
-			worldIn.spawnEntityInWorld(new EntityThrowingStone(worldIn, playerIn));
+			EntityThrowingStone stone = new EntityThrowingStone(worldIn, playerIn);
+			stone.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+			worldIn.spawnEntityInWorld(stone);
 		}
 
 		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
