@@ -32,6 +32,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import the_fireplace.adobeblocks.blocks.*;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
@@ -154,6 +155,8 @@ public class AdobeBlocks {
 		registerItem(adobe_door);
 		registerItem(throwing_stone);
 		registerItem(adobe_hoe);
+
+		OreDictionary.registerOre("stickStone", stone_stick);
 
 		int eid = -1;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
