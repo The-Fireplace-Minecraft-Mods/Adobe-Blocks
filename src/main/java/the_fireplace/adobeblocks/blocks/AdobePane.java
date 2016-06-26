@@ -43,22 +43,22 @@ public class AdobePane extends Block {
 		state = this.getActualState(state, worldIn, pos);
 		addCollisionBoxToList(pos, p_185477_4_, p_185477_5_, field_185730_f[0]);
 
-		if ((Boolean) state.getValue(NORTH))
+		if (state.getValue(NORTH))
 		{
 			addCollisionBoxToList(pos, p_185477_4_, p_185477_5_, field_185730_f[getBoundingBoxIndex(EnumFacing.NORTH)]);
 		}
 
-		if ((Boolean) state.getValue(SOUTH))
+		if (state.getValue(SOUTH))
 		{
 			addCollisionBoxToList(pos, p_185477_4_, p_185477_5_, field_185730_f[getBoundingBoxIndex(EnumFacing.SOUTH)]);
 		}
 
-		if ((Boolean) state.getValue(EAST))
+		if (state.getValue(EAST))
 		{
 			addCollisionBoxToList(pos, p_185477_4_, p_185477_5_, field_185730_f[getBoundingBoxIndex(EnumFacing.EAST)]);
 		}
 
-		if ((Boolean) state.getValue(WEST))
+		if (state.getValue(WEST))
 		{
 			addCollisionBoxToList(pos, p_185477_4_, p_185477_5_, field_185730_f[getBoundingBoxIndex(EnumFacing.WEST)]);
 		}
@@ -79,22 +79,22 @@ public class AdobePane extends Block {
 	{
 		int i = 0;
 
-		if ((Boolean) p_185728_0_.getValue(NORTH))
+		if (p_185728_0_.getValue(NORTH))
 		{
 			i |= getBoundingBoxIndex(EnumFacing.NORTH);
 		}
 
-		if ((Boolean) p_185728_0_.getValue(EAST))
+		if (p_185728_0_.getValue(EAST))
 		{
 			i |= getBoundingBoxIndex(EnumFacing.EAST);
 		}
 
-		if ((Boolean) p_185728_0_.getValue(SOUTH))
+		if (p_185728_0_.getValue(SOUTH))
 		{
 			i |= getBoundingBoxIndex(EnumFacing.SOUTH);
 		}
 
-		if ((Boolean) p_185728_0_.getValue(WEST))
+		if (p_185728_0_.getValue(WEST))
 		{
 			i |= getBoundingBoxIndex(EnumFacing.WEST);
 		}

@@ -52,22 +52,20 @@ public class ContainerAdobeFurnace extends Container {
 		super.detectAndSendChanges();
 
 		for (IContainerListener crafter : this.listeners) {
-			IContainerListener icrafting = crafter;
-
 			if (this.field_178152_f != this.tileFurnace.getField(2)) {
-				icrafting.sendProgressBarUpdate(this, 2, this.tileFurnace.getField(2));
+				crafter.sendProgressBarUpdate(this, 2, this.tileFurnace.getField(2));
 			}
 
 			if (this.field_178154_h != this.tileFurnace.getField(0)) {
-				icrafting.sendProgressBarUpdate(this, 0, this.tileFurnace.getField(0));
+				crafter.sendProgressBarUpdate(this, 0, this.tileFurnace.getField(0));
 			}
 
 			if (this.field_178155_i != this.tileFurnace.getField(1)) {
-				icrafting.sendProgressBarUpdate(this, 1, this.tileFurnace.getField(1));
+				crafter.sendProgressBarUpdate(this, 1, this.tileFurnace.getField(1));
 			}
 
 			if (this.field_178153_g != this.tileFurnace.getField(3)) {
-				icrafting.sendProgressBarUpdate(this, 3, this.tileFurnace.getField(3));
+				crafter.sendProgressBarUpdate(this, 3, this.tileFurnace.getField(3));
 			}
 		}
 

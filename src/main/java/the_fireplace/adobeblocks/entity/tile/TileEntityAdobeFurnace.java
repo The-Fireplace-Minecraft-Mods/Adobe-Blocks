@@ -173,10 +173,9 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 		compound.setShort("CookTime", (short) this.cookTime);
 		compound.setShort("CookTimeTotal", (short) this.totalCookTime);
 		NBTTagList nbttaglist = new NBTTagList();
-
+		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 		for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
 			if (this.furnaceItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
