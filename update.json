@@ -1,10 +1,9 @@
 {
 	"homepage": "http://mods.curse.com/mc-mods/minecraft/236104-adobe-blocks-2",
 	"promos": {
+		"1.10-latest": "!!VERSION!!",
+		"1.10-recommended": "!!VERSION!!",
 		"1.9.4-latest": "!!VERSION!!",
 		"1.9.4-recommended": "!!VERSION!!"
-	},
-	"1.9.4": {
-		"!!VERSION!!": "Changelog at http://mods.curse.com/mc-mods/minecraft/236104-adobe-blocks-2#t1:changes"
 	}
 }
