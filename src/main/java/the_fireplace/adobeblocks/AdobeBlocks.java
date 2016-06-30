@@ -42,7 +42,7 @@ import the_fireplace.adobeblocks.items.*;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
-@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://caterpillar.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.9.4,1.10)")
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://caterpillar.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.9.4,1.10.2]")
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
