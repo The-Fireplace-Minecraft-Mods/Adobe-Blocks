@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -65,7 +66,7 @@ public class AdobeBlocks {
 	public static final Block adobe_wall = new AdobeWall();
 	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(0.875F);
 	public static final Block adobe_stairs = new AdobeStairs();
-	public static final Block adobe_slab = new AdobeHalfSlab();
+	public static final AdobeHalfSlab adobe_slab = new AdobeHalfSlab();
 	public static final Block adobe_glass = new AdobeGlass();
 	public static final Block adobe_door_internal = new AdobeDoor();
 	public static final Block adobe_glass_pane = new AdobePane().setUnlocalizedName("adobe_glass_pane").setHardness(0.3F);
@@ -113,12 +114,14 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		AdobeSlab doubleSlab = new AdobeDoubleSlab();
+		AdobeDoubleSlab doubleSlab = new AdobeDoubleSlab();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
-		GameRegistry.registerBlock(adobe_slab, ItemBlockAdobeSlab.class, "adobe_slab", adobe_slab, doubleSlab, false);
-		GameRegistry.registerBlock(doubleSlab, ItemBlockAdobeSlab.class, "double_adobe_slab", adobe_slab, doubleSlab, true);
+		GameRegistry.register(adobe_slab.setRegistryName("adobe_slab"));
+		GameRegistry.register(new ItemBlockAdobeSlab(adobe_slab, adobe_slab, doubleSlab, false).setRegistryName("adobe_slab"));
+		GameRegistry.register(doubleSlab.setRegistryName("double_adobe_slab"));
+		GameRegistry.register(new ItemBlockAdobeSlab(doubleSlab, adobe_slab, doubleSlab, true).setRegistryName("double_adobe_slab"));
 		registerBlock(adobe_mixture_block);
 		registerBlock(adobe_tile);
 		registerBlock(adobe_bricks);
@@ -135,7 +138,7 @@ public class AdobeBlocks {
 		registerBlock(jungle_beam);
 		registerBlock(dark_oak_beam);
 		registerBlock(acacia_beam);
-		GameRegistry.registerBlock(adobe_block, ItemAdobeBlock.class, "adobe_block");
+		registerBlock(adobe_block, new ItemAdobeBlock(adobe_block));
 		registerItem(adobe_mixture);
 		registerItem(adobe_brick);
 		registerItem(adobe_sword);
@@ -229,10 +232,16 @@ public class AdobeBlocks {
 	}
 
 	private void registerItem(Item item) {
-		GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
+		GameRegistry.register(item.setRegistryName(item.getUnlocalizedName().substring(5)));
 	}
 
 	private void registerBlock(Block block) {
-		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
+		GameRegistry.register(block.setRegistryName(block.getUnlocalizedName().substring(5)));
+		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getUnlocalizedName().substring(5)));
+	}
+
+	private void registerBlock(Block block, ItemBlock item) {
+		GameRegistry.register(block.setRegistryName(block.getUnlocalizedName().substring(5)));
+		GameRegistry.register(item.setRegistryName(block.getUnlocalizedName().substring(5)));
 	}
 }
