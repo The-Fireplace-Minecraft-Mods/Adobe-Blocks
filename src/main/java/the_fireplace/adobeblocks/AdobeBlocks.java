@@ -153,13 +153,13 @@ public class AdobeBlocks {
 
 		int eid = -1;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
+		proxy.registerRenderers();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
-		proxy.registerRenderers();
 		if (event.getSide().isClient())
 			registerItemRenders();
 	}
