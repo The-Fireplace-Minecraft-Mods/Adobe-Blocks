@@ -2,6 +2,7 @@ package the_fireplace.adobeblocks.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -36,6 +37,7 @@ public class AdobePane extends Block {
 		super(AdobeBlocks.adobe);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, false).withProperty(EAST, false).withProperty(SOUTH, false).withProperty(WEST, false));
 		this.setCreativeTab(AdobeBlocks.TabAdobeBlocks);
+		setSoundType(SoundType.GLASS);
 	}
 
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB p_185477_4_, List<AxisAlignedBB> p_185477_5_, Entity p_185477_6_)
