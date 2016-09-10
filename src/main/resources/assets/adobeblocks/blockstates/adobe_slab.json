@@ -5,6 +5,12 @@
     },
     "half=top,variant=false": {
       "model": "adobeblocks:upper_adobe_slab"
+    },
+    "half=bottom,variant=true": {
+      "model": "adobeblocks:adobe_slab"
+    },
+    "half=top,variant=true": {
+      "model": "adobeblocks:upper_adobe_slab"
     }
   }
 }

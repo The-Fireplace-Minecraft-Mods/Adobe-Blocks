@@ -6,8 +6,6 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +19,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -157,35 +156,35 @@ public class AdobeBlocks {
 		int eid = -1;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
 		proxy.registerRenderers();
+		if (event.getSide().isClient())
+			registerItemRenders();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
-		if (event.getSide().isClient())
-			registerItemRenders();
 	}
 
 	@SideOnly(Side.CLIENT)
 	private void registerItemRenders() {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID + ":adobe_mixture_block", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID + ":adobe_tile", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID + ":adobe_bricks", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID + ":adobe_wall", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID + ":adobe_stairs", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID + ":adobe_slab", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID + ":adobe_glass", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID + ":adobe_glass_pane", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(oak_beam), 0, new ModelResourceLocation(MODID + ":oak_beam", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(spruce_beam), 0, new ModelResourceLocation(MODID + ":spruce_beam", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(jungle_beam), 0, new ModelResourceLocation(MODID + ":jungle_beam", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(birch_beam), 0, new ModelResourceLocation(MODID + ":birch_beam", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(dark_oak_beam), 0, new ModelResourceLocation(MODID + ":dark_oak_beam", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(acacia_beam), 0, new ModelResourceLocation(MODID + ":acacia_beam", "inventory"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(adobe_block),
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID + ":adobe_mixture_block", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID + ":adobe_tile", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID + ":adobe_bricks", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(lit_adobe_furnace), 0, new ModelResourceLocation(MODID + ":adobe_furnace", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_wall), 0, new ModelResourceLocation(MODID + ":adobe_wall", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_stairs), 0, new ModelResourceLocation(MODID + ":adobe_stairs", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_slab), 0, new ModelResourceLocation(MODID + ":adobe_slab", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_glass), 0, new ModelResourceLocation(MODID + ":adobe_glass", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_glass_pane), 0, new ModelResourceLocation(MODID + ":adobe_glass_pane", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(oak_beam), 0, new ModelResourceLocation(MODID + ":oak_beam", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(spruce_beam), 0, new ModelResourceLocation(MODID + ":spruce_beam", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(jungle_beam), 0, new ModelResourceLocation(MODID + ":jungle_beam", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(birch_beam), 0, new ModelResourceLocation(MODID + ":birch_beam", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(dark_oak_beam), 0, new ModelResourceLocation(MODID + ":dark_oak_beam", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(acacia_beam), 0, new ModelResourceLocation(MODID + ":acacia_beam", "inventory"));
+		ModelLoader.registerItemVariants(Item.getItemFromBlock(adobe_block),
 				new ModelResourceLocation(MODID + ":after_effects", "inventory"),
 				new ModelResourceLocation(MODID + ":audition", "inventory"),
 				new ModelResourceLocation(MODID + ":bridge", "inventory"),
@@ -201,34 +200,34 @@ public class AdobeBlocks {
 				new ModelResourceLocation(MODID + ":prelude", "inventory"),
 				new ModelResourceLocation(MODID + ":premier_pro", "inventory"),
 				new ModelResourceLocation(MODID + ":speedgrade", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 0, new ModelResourceLocation(MODID + ":after_effects", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 1, new ModelResourceLocation(MODID + ":audition", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 2, new ModelResourceLocation(MODID + ":bridge", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 3, new ModelResourceLocation(MODID + ":dreamweaver", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 4, new ModelResourceLocation(MODID + ":encore", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 5, new ModelResourceLocation(MODID + ":fireworks", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 6, new ModelResourceLocation(MODID + ":flash", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 7, new ModelResourceLocation(MODID + ":flash_builder", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 8, new ModelResourceLocation(MODID + ":illustrator", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 9, new ModelResourceLocation(MODID + ":indesign", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 10, new ModelResourceLocation(MODID + ":lightroom", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 11, new ModelResourceLocation(MODID + ":photoshop", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 12, new ModelResourceLocation(MODID + ":prelude", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 13, new ModelResourceLocation(MODID + ":premier_pro", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(adobe_block), 14, new ModelResourceLocation(MODID + ":speedgrade", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 0, new ModelResourceLocation(MODID + ":after_effects", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 1, new ModelResourceLocation(MODID + ":audition", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 2, new ModelResourceLocation(MODID + ":bridge", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 3, new ModelResourceLocation(MODID + ":dreamweaver", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 4, new ModelResourceLocation(MODID + ":encore", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 5, new ModelResourceLocation(MODID + ":fireworks", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 6, new ModelResourceLocation(MODID + ":flash", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 7, new ModelResourceLocation(MODID + ":flash_builder", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 8, new ModelResourceLocation(MODID + ":illustrator", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 9, new ModelResourceLocation(MODID + ":indesign", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 10, new ModelResourceLocation(MODID + ":lightroom", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 11, new ModelResourceLocation(MODID + ":photoshop", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 12, new ModelResourceLocation(MODID + ":prelude", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 13, new ModelResourceLocation(MODID + ":premier_pro", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_block), 14, new ModelResourceLocation(MODID + ":speedgrade", "inventory"));
 
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_mixture, 0, new ModelResourceLocation(MODID + ":adobe_mixture", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_brick, 0, new ModelResourceLocation(MODID + ":adobe_brick", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_sword, 0, new ModelResourceLocation(MODID + ":adobe_sword", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_pickaxe, 0, new ModelResourceLocation(MODID + ":adobe_pickaxe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_axe, 0, new ModelResourceLocation(MODID + ":adobe_axe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_shovel, 0, new ModelResourceLocation(MODID + ":adobe_shovel", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_hoe, 0, new ModelResourceLocation(MODID + ":adobe_hoe", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(stone_stick, 0, new ModelResourceLocation(MODID + ":stone_stick", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_door, 0, new ModelResourceLocation(MODID + ":adobe_door", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(throwing_stone, 0, new ModelResourceLocation(MODID + ":adobe_throwing_stone", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(adobe_capsule, 0, new ModelResourceLocation(MODID + ":adobe_capsule", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(filled_adobe_capsule, 0, new ModelResourceLocation(MODID + ":filled_adobe_capsule", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_mixture, 0, new ModelResourceLocation(MODID + ":adobe_mixture", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_brick, 0, new ModelResourceLocation(MODID + ":adobe_brick", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_sword, 0, new ModelResourceLocation(MODID + ":adobe_sword", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_pickaxe, 0, new ModelResourceLocation(MODID + ":adobe_pickaxe", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_axe, 0, new ModelResourceLocation(MODID + ":adobe_axe", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_shovel, 0, new ModelResourceLocation(MODID + ":adobe_shovel", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_hoe, 0, new ModelResourceLocation(MODID + ":adobe_hoe", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(stone_stick, 0, new ModelResourceLocation(MODID + ":stone_stick", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_door, 0, new ModelResourceLocation(MODID + ":adobe_door", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(throwing_stone, 0, new ModelResourceLocation(MODID + ":adobe_throwing_stone", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(adobe_capsule, 0, new ModelResourceLocation(MODID + ":adobe_capsule", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(filled_adobe_capsule, 0, new ModelResourceLocation(MODID + ":filled_adobe_capsule", "inventory"));
 	}
 
 	private void registerItem(Item item) {
