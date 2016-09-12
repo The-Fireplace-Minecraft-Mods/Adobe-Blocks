@@ -7,7 +7,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.*;
@@ -18,9 +17,11 @@ import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.container.ContainerAdobeFurnace;
 
@@ -205,11 +206,6 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 	 */
 	public boolean isBurning() {
 		return this.furnaceBurnTime > 0;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static boolean isBurning(IInventory p_174903_0_) {
-		return p_174903_0_.getField(0) > 0;
 	}
 
 	/**
@@ -472,5 +468,23 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 		for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
 			this.furnaceItemStacks[i] = null;
 		}
+	}
+
+	IItemHandler handlerTop = new SidedInvWrapper(this, EnumFacing.UP);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
+	IItemHandler handlerSide = new SidedInvWrapper(this, EnumFacing.WEST);
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			if (facing == EnumFacing.DOWN)
+				return (T) handlerBottom;
+			else if (facing == EnumFacing.UP)
+				return (T) handlerTop;
+			else
+				return (T) handlerSide;
+		return super.getCapability(capability, facing);
 	}
 }
