@@ -42,6 +42,7 @@ public class VanillaRecipes {
 	static ItemStack adobeStairsStack4 = new ItemStack(AdobeBlocks.adobe_stairs, 4);
 	static ItemStack adobeWallStack6 = new ItemStack(AdobeBlocks.adobe_wall, 6);
 	static String stoneStickStack = "stickStone";
+	static String stoneRodStack = "rodStone";
 	static ItemStack stoneStickStack4 = new ItemStack(AdobeBlocks.stone_stick, 6);
 	static ItemStack adobeSwordStack = new ItemStack(AdobeBlocks.adobe_sword);
 	static ItemStack adobeAxeStack = new ItemStack(AdobeBlocks.adobe_axe);
@@ -87,6 +88,13 @@ public class VanillaRecipes {
 		addRecipe(adobeAxeStack, "aa", "as", " s", 'a', adobeBrickStack, 's', stoneStickStack);
 		addRecipe(adobeHoeStack, "aa", "s ", "s ", 'a', adobeBrickStack, 's', stoneStickStack);
 		addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneStickStack);
+		addRecipe(adobeSwordStack, "a", "a", "s", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobePickaxeStack, "aaa", " s ", " s ", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobeShovelStack, "a", "s", "s", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobeAxeStack, "aa", "sa", "s ", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobeAxeStack, "aa", "as", " s", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobeHoeStack, "aa", "s ", "s ", 'a', adobeBrickStack, 's', stoneRodStack);
+		addRecipe(adobeHoeStack, "aa", " s", " s", 'a', adobeBrickStack, 's', stoneRodStack);
 		addRecipe(adobeDoorStack3, "bb", "bb", "bb", 'b', adobeBricksStack);
 		addRecipe(adobePaneStack16, "ggg", "ggg", 'g', adobeGlassStack);
 		addRecipe(capsuleStack4, " a ", "a a", " a ", 'a', adobeMixStack);

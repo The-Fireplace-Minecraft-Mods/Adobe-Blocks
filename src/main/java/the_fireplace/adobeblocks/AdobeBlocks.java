@@ -152,6 +152,7 @@ public class AdobeBlocks {
 		registerItem(adobe_hoe);
 
 		OreDictionary.registerOre("stickStone", stone_stick);
+		OreDictionary.registerOre("rodStone", stone_stick);
 
 		int eid = -1;
 		EntityRegistry.registerModEntity(EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
