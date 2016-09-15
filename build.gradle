@@ -41,7 +41,7 @@ curseforge {
   }
 }
 
-version = "!!VERSION!!"
+version = "6.0.X"
 group= "the_fireplace.adobeblocks"
 archivesBaseName = "AdobeBlocks-Forge"
 
