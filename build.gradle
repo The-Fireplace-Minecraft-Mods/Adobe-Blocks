@@ -34,16 +34,14 @@ curseforge {
     changelog = file('changelog.txt')
     releaseType = 'release'
     addGameVersion '1.10.2'
-	addGameVersion '1.10'
-	addGameVersion '1.9.4'
 	addGameVersion 'Java 8'
     mainArtifact jar
   }
 }
 
-version = "6.0.X"
+version = "6.0.5"
 group= "the_fireplace.adobeblocks"
-archivesBaseName = "AdobeBlocks-Forge"
+archivesBaseName = "AdobeBlocks"
 
 modsIO {
     key = project.modsioApiKey
@@ -58,13 +56,14 @@ modsIO {
 }
 
 minecraft {
-    version = "1.10.2-12.18.0.2004-1.10.0"
+    version = "1.10.2-12.18.2.2120"
     runDir = "run"
     mappings = "snapshot_20160518"
+    useDepAts = true
 }
 
 dependencies {
-	deobfCompile group: "mezz.jei", name: "jei_1.9.4", version: "3.4.0.204"
+	deobfCompile group: "mezz.jei", name: "jei_1.10.2", version: "3.13.2.360"
 }
 
 repositories{
