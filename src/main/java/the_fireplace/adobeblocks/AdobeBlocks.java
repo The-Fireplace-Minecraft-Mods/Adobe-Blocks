@@ -66,6 +66,7 @@ public class AdobeBlocks {
 	public static final Block lit_adobe_furnace = new AdobeFurnace(true).setUnlocalizedName("lit_adobe_furnace").setLightLevel(0.875F);
 	public static final Block adobe_stairs = new AdobeStairs();
 	public static final AdobeHalfSlab adobe_slab = new AdobeHalfSlab();
+	public static final AdobeDoubleSlab adobe_double_slab = new AdobeDoubleSlab();
 	public static final Block adobe_glass = new AdobeGlass();
 	public static final Block adobe_door_internal = new AdobeDoor();
 	public static final Block adobe_glass_pane = new AdobePane().setUnlocalizedName("adobe_glass_pane").setHardness(0.3F);
@@ -113,14 +114,12 @@ public class AdobeBlocks {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		AdobeDoubleSlab doubleSlab = new AdobeDoubleSlab();
-
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
 		GameRegistry.register(adobe_slab.setRegistryName("adobe_slab"));
-		GameRegistry.register(new ItemBlockAdobeSlab(adobe_slab, adobe_slab, doubleSlab, false).setRegistryName("adobe_slab"));
-		GameRegistry.register(doubleSlab.setRegistryName("double_adobe_slab"));
-		GameRegistry.register(new ItemBlockAdobeSlab(doubleSlab, adobe_slab, doubleSlab, true).setRegistryName("double_adobe_slab"));
+		GameRegistry.register(new ItemBlockAdobeSlab(adobe_slab, adobe_slab, adobe_double_slab, false).setRegistryName("adobe_slab"));
+		GameRegistry.register(adobe_double_slab.setRegistryName("double_adobe_slab"));
+		GameRegistry.register(new ItemBlockAdobeSlab(adobe_double_slab, adobe_slab, adobe_double_slab, true).setRegistryName("double_adobe_slab"));
 		registerBlock(adobe_mixture_block);
 		registerBlock(adobe_tile);
 		registerBlock(adobe_bricks);
