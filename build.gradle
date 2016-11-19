@@ -17,10 +17,12 @@ buildscript {
 }
 
 plugins {
-    id "com.matthewprenger.cursegradle" version "1.0.4"
+    id "com.matthewprenger.cursegradle" version "1.0.8"
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'net.cazzar.gradle.modsio'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 allprojects {
     sourceCompatibility = 1.8
@@ -86,5 +88,77 @@ processResources
         
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+task showVersion {
+    description "Displays the current version"
+    group "help"
+    
+    compileJava.dependsOn showVersion
+    deobfCompileDummyTask.dependsOn showVersion
+    extractMcpMappings.dependsOn showVersion
+  
+    doLast {
+        def versionFile = new File(buildDir, '.version');
+    
+        versionFile.getParentFile().mkdirs();
+        versionFile.text = version;
+    }
+    
+    outputs.upToDateWhen { false }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives jar
+    archives deobfJar
+    archives sourceJar
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            if (project.hasProperty("local_maven")) {
+                repository(url: "file://${local_maven}")
+                pom {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = project.archivesBaseName
+                    project {
+                        name project.archivesBaseName
+                        packaging "jar"
+                        description "Adobe Blocks"
+                        url "https://github.com/The-Fireplace/Adobe-Blocks"
+                        issueManagement {
+                            system "github"
+                            url "https://github.com/The-Fireplace/Adobe-Blocks/issues"
+                        }
+                        licenses {
+                            license {
+                                name "License"
+                                url "https://github.com/The-Fireplace/Adobe-Blocks/blob/master/LICENSE"
+                                distribution "repo"
+                            }
+                        }
+                        developers {
+                            developer {
+                                id "fireplace"
+                                name "The_Fireplace"
+                                roles {
+                                    role "owner"
+                                    role "developer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
