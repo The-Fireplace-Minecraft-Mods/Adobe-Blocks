@@ -5,7 +5,6 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -28,7 +27,7 @@ public class ItemAdobeDoor extends Item {
 	 * @param pos  The block being right-clicked
 	 */
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (side != EnumFacing.UP) {
 			return EnumActionResult.FAIL;
 		} else {
@@ -39,13 +38,13 @@ public class ItemAdobeDoor extends Item {
 				pos = pos.offset(side);
 			}
 
-			if (!playerIn.canPlayerEdit(pos, side, stack)) {
+			if (!playerIn.canPlayerEdit(pos, side, playerIn.getHeldItem(hand))) {
 				return EnumActionResult.FAIL;
 			} else if (!this.block.canPlaceBlockAt(worldIn, pos)) {
 				return EnumActionResult.FAIL;
 			} else {
 				placeDoor(worldIn, pos, EnumFacing.fromAngle(playerIn.rotationYaw), this.block);
-				--stack.stackSize;
+				playerIn.getHeldItem(hand).shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
 		}
@@ -68,7 +67,7 @@ public class ItemAdobeDoor extends Item {
 		IBlockState iblockstate = door.getDefaultState().withProperty(BlockDoor.FACING, facing).withProperty(BlockDoor.HINGE, flag2 ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT);
 		worldIn.setBlockState(pos, iblockstate.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER), 2);
 		worldIn.setBlockState(blockpos3, iblockstate.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), 2);
-		worldIn.notifyNeighborsOfStateChange(pos, door);
-		worldIn.notifyNeighborsOfStateChange(blockpos3, door);
+		worldIn.notifyNeighborsOfStateChange(pos, door, true);
+		worldIn.notifyNeighborsOfStateChange(blockpos3, door, true);
 	}
 }

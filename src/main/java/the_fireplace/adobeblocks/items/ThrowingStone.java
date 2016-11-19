@@ -22,9 +22,9 @@ public class ThrowingStone extends Item {
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (!playerIn.capabilities.isCreativeMode) {
-			--itemStackIn.stackSize;
+			playerIn.getHeldItem(hand).shrink(1);
 		}
 
 		worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
@@ -32,9 +32,9 @@ public class ThrowingStone extends Item {
 		if (!worldIn.isRemote) {
 			EntityThrowingStone stone = new EntityThrowingStone(worldIn, playerIn);
 			stone.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-			worldIn.spawnEntityInWorld(stone);
+			worldIn.spawnEntity(stone);
 		}
 
-		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
 	}
 }

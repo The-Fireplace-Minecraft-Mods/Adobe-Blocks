@@ -4,11 +4,10 @@ import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
-
-import java.util.List;
 
 public class AdobeWall extends BlockWall {
 
@@ -23,7 +22,7 @@ public class AdobeWall extends BlockWall {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		list.add(new ItemStack(itemIn));
 	}

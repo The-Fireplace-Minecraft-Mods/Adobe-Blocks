@@ -1,7 +1,7 @@
 package the_fireplace.adobeblocks;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class TabAdobeBlocks extends CreativeTabs {
 	/** Texture to use. */
@@ -13,11 +13,11 @@ public class TabAdobeBlocks extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		return AdobeBlocks.adobe_mixture;
+	public ItemStack getTabIconItem() {
+		return new ItemStack(AdobeBlocks.adobe_mixture);
 	}
 
-
+	@Override
 	public String getBackgroundImageName()
 	{
 		return this.isTabInFirstRow() ? this.theTexture : this.theTexture_;

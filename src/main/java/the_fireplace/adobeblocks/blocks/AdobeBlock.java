@@ -8,10 +8,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import the_fireplace.adobeblocks.AdobeBlocks;
 
 import java.util.Calendar;
-import java.util.List;
 
 /**
  * @author The_Fireplace
@@ -43,7 +43,7 @@ public class AdobeBlock extends Block {
 		return new BlockStateContainer(this, STATE);
 	}
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, List list){
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list){
 		list.add(new ItemStack(item, 1, 0));
 		list.add(new ItemStack(item, 1, 1));
 		list.add(new ItemStack(item, 1, 2));

@@ -35,7 +35,7 @@ public class EntityThrowingStone extends EntityThrowable {
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), damage);
 		}
 
-		if (!this.worldObj.isRemote) {
+		if (!this.world.isRemote) {
 			this.setDead();
 		}
 	}

@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import the_fireplace.adobeblocks.AdobeBlocks;
@@ -90,13 +89,13 @@ public abstract class AdobeSlab extends BlockSlab {
 
 	@Override
 	public final Item getItemDropped(IBlockState state, Random rand, int unused) {
-		return getItemFromBlock(innerGetId(false));
+		return Item.getItemFromBlock(AdobeBlocks.adobe_slab);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public final ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(getItemFromBlock(innerGetId(false)));
+		return new ItemStack(AdobeBlocks.adobe_slab);
 	}
 
 	@Override
@@ -106,17 +105,5 @@ public abstract class AdobeSlab extends BlockSlab {
 		} else {
 			return new BlockStateContainer(this, VARIANT_PROPERTY, HALF);
 		}
-	}
-
-	private String innerGetId(boolean isDoubleStacked) {
-		String result = "";
-		if (isDoubleStacked) {
-			result = "double_";
-		}
-		return result + "adobe_slab";
-	}
-
-	private static Item getItemFromBlock(String name) {
-		return GameRegistry.findItem(AdobeBlocks.MODID, name);
 	}
 }
