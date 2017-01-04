@@ -1,1 +1,2 @@
-Updated to 1.11
+Fixed the Adobe Furnace
+Updated to 1.11.2

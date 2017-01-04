@@ -29,20 +29,20 @@ allprojects {
     targetCompatibility = 1.8
 }
 
-version = "7.0.0"
+version = "7.0.1"
 group= "the_fireplace.adobeblocks"
-archivesBaseName = "AdobeBlocks"
+archivesBaseName = "AdobeBlocks-1.11.2"
 
 minecraft {
-    version = "1.11-13.19.0.2153"
+    version = "1.11.2-13.20.0.2201"
     runDir = "run"
     replace '${version}', project.version
-    mappings = "snapshot_20161119"
+    mappings = "snapshot_20161229"
     useDepAts = true
 }
 
 dependencies {
-	deobfCompile group: "mezz.jei", name: "jei_1.11", version: "4.0.1.193"
+	deobfCompile group: "mezz.jei", name: "jei_1.11.2", version: "4.2.2.220"
 }
 
 repositories{
@@ -101,8 +101,8 @@ curseforge {
   project {
     id = '236104'
     changelog = file('changelog.txt')
-    releaseType = 'beta'
-    addGameVersion '1.11'
+    releaseType = 'release'
+    addGameVersion '1.11.2'
 	addGameVersion 'Java 8'
     mainArtifact(jar) {
         displayName = jar.archiveName.replace(".jar", "")
@@ -123,9 +123,9 @@ modsIO {
     project{
 		artifact = new File(jar.destinationDir, archivesBaseName+"-"+version+".jar")
 		modid = "1219"
-		minecraft = "1.11"
+		minecraft = "1.11.2"
 		try{changelog = file('changelog.txt').text}catch(Exception e){changelog=""}
-		tag = "beta"
+		tag = ""
 		current = true
     }
 }
