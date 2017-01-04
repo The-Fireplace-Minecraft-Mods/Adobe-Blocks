@@ -1,7 +1,6 @@
 package the_fireplace.adobeblocks.entity.tile;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,6 +23,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import the_fireplace.adobeblocks.blocks.AdobeFurnace;
 import the_fireplace.adobeblocks.container.ContainerAdobeFurnace;
 
 public class TileEntityAdobeFurnace extends TileEntityLockable implements ITickable, ISidedInventory {
@@ -249,7 +249,7 @@ public class TileEntityAdobeFurnace extends TileEntityLockable implements ITicka
 			if (flag != this.isBurning())
 			{
 				flag1 = true;
-				BlockFurnace.setState(this.isBurning(), this.world, this.pos);
+				AdobeFurnace.setState(this.isBurning(), this.world, this.pos);
 			}
 		}
 
