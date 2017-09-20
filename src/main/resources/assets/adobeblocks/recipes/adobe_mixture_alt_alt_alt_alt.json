@@ -1,0 +1,36 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "#DIRT"
+    },
+    {
+      "item": "#DIRT"
+    },
+    {
+      "item": "#DIRT"
+    },
+    {
+      "item": "#DIRT"
+    },
+    {
+      "item": "#SAND"
+    },
+    {
+      "item": "#SAND"
+    },
+    {
+      "item": "#SAND"
+    },
+    {
+      "item": "#SAND"
+    }
+  ],
+  "result": {
+    "item": "adobeblocks:adobe_mixture",
+    "count": 32
+  }
+}

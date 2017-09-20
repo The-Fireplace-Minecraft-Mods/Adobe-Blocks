@@ -20,6 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -64,10 +65,9 @@ import the_fireplace.adobeblocks.items.ItemAdobeBlock;
 import the_fireplace.adobeblocks.items.ItemAdobeDoor;
 import the_fireplace.adobeblocks.items.ThrowingStone;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
-import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
 @Mod.EventBusSubscriber
-@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://thefireplace.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.11,)")
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://thefireplace.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.12]")
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
@@ -148,19 +148,24 @@ public class AdobeBlocks {
 		int eid = -1;
 		EntityRegistry.registerModEntity(new ResourceLocation("adobeblocks:adobe_thrown_stone"), EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
 		proxy.registerRenderers();
+		/*
 		if (event.getSide().isClient())
 			registerItemRenders();
+		*/
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
-		VanillaRecipes.initRecipes();
-		VanillaRecipes.generateConstants();
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void registerItemRenders() {
+	@SubscribeEvent
+	public static void modelRegister(ModelRegistryEvent e) {
+		registerItemRenders();
+	}
+	
+	private static void registerItemRenders() {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_mixture_block), 0, new ModelResourceLocation(MODID + ":adobe_mixture_block", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_tile), 0, new ModelResourceLocation(MODID + ":adobe_tile", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(adobe_bricks), 0, new ModelResourceLocation(MODID + ":adobe_bricks", "inventory"));

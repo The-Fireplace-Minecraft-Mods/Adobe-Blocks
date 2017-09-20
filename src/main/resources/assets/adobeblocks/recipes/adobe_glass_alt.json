@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "GGG",
+    "GAG",
+    "GGG"
+  ],
+  "key": {
+    "A": {
+      "item": "adobeblocks:adobe_mixture"
+    },
+    "G": {
+      "item": "#BLOCKGLASS"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:adobe_glass",
+    "count": 8
+  }
+}

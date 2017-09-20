@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "adobeblocks:adobe_mixture"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:adobe_mixture_block"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "A A",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "adobeblocks:adobe_mixture"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:adobe_capsule",
+    "count": 4
+  }
+}

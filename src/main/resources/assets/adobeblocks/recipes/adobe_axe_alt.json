@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "AA",
+    "AS",
+    " S"
+  ],
+  "key": {
+    "A": {
+      "item": "adobeblocks:adobe_brick"
+    },
+    "S": {
+      "item": "#STICKSTONE"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:adobe_axe"
+  }
+}

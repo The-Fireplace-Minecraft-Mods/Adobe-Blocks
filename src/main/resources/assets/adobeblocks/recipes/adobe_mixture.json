@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "adobeblocks:adobe_mixture_block"
+    }
+  ],
+  "result": {
+    "item": "adobeblocks:adobe_mixture",
+    "count": 9
+  }
+}

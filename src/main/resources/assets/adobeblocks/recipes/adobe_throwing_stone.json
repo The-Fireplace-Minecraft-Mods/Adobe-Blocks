@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "adobeblocks:adobe_brick"
+    }
+  ],
+  "result": {
+    "item": "adobeblocks:adobe_throwing_stone"
+  }
+}

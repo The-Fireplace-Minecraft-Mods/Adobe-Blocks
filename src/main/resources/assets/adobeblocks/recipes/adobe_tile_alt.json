@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "adobeblocks:adobe_bricks"
+    },
+    "I": {
+      "item": "adobeblocks:adobe_brick"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:adobe_tile",
+    "count": 4
+  }
+}

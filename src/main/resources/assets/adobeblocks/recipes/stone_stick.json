@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "#STONE"
+    }
+  },
+  "result": {
+    "item": "adobeblocks:stone_stick",
+    "count": 6
+  }
+}

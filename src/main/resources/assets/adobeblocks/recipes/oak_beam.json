@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_slab",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "adobeblocks:oak_beam",
+    "count": 2
+  }
+}
