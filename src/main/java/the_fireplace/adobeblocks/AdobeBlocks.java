@@ -22,27 +22,51 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import the_fireplace.adobeblocks.blocks.*;
+import net.minecraftforge.registries.IForgeRegistry;
+import the_fireplace.adobeblocks.blocks.AdobeBlock;
+import the_fireplace.adobeblocks.blocks.AdobeBricks;
+import the_fireplace.adobeblocks.blocks.AdobeDoor;
+import the_fireplace.adobeblocks.blocks.AdobeDoubleSlab;
+import the_fireplace.adobeblocks.blocks.AdobeFurnace;
+import the_fireplace.adobeblocks.blocks.AdobeGlass;
+import the_fireplace.adobeblocks.blocks.AdobeHalfSlab;
+import the_fireplace.adobeblocks.blocks.AdobeMixtureBlock;
+import the_fireplace.adobeblocks.blocks.AdobePane;
+import the_fireplace.adobeblocks.blocks.AdobeStairs;
+import the_fireplace.adobeblocks.blocks.AdobeTile;
+import the_fireplace.adobeblocks.blocks.AdobeWall;
+import the_fireplace.adobeblocks.blocks.Beam;
+import the_fireplace.adobeblocks.blocks.ItemBlockAdobeSlab;
 import the_fireplace.adobeblocks.entity.projectile.EntityThrowingStone;
 import the_fireplace.adobeblocks.entity.tile.TileEntityAdobeFurnace;
 import the_fireplace.adobeblocks.handlers.AdobeBlocksGuiHandler;
 import the_fireplace.adobeblocks.handlers.DispenseBehaviorThrowingStone;
-import the_fireplace.adobeblocks.items.*;
+import the_fireplace.adobeblocks.items.AdobeAxe;
+import the_fireplace.adobeblocks.items.AdobeHoe;
+import the_fireplace.adobeblocks.items.AdobePickaxe;
+import the_fireplace.adobeblocks.items.AdobeShovel;
+import the_fireplace.adobeblocks.items.AdobeSword;
+import the_fireplace.adobeblocks.items.ItemAdobeBlock;
+import the_fireplace.adobeblocks.items.ItemAdobeDoor;
+import the_fireplace.adobeblocks.items.ThrowingStone;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 import the_fireplace.adobeblocks.recipes.VanillaRecipes;
 
+@Mod.EventBusSubscriber
 @Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://thefireplace.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.11,)")
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
@@ -86,22 +110,22 @@ public class AdobeBlocks {
 		@Override
 		public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 			RayTraceResult movingobjectposition = this.rayTrace(worldIn, playerIn, true);
-			if (movingobjectposition == null) return new ActionResult(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+			if (movingobjectposition == null) return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 			else {
 				if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
 					BlockPos blockpos = movingobjectposition.getBlockPos();
 					if (!worldIn.isBlockModifiable(playerIn, blockpos))
-						return new ActionResult(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+						return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 					if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, playerIn.getHeldItem(hand)))
-						return new ActionResult(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+						return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 					Material material = iblockstate.getMaterial();
 					if (material == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
-						return new ActionResult(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule, playerIn.getHeldItem(hand).getCount()));
+						return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule, playerIn.getHeldItem(hand).getCount()));
 					}
 				}
 			}
-			return new ActionResult(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 		}
 	}.setUnlocalizedName("adobe_capsule").setCreativeTab(TabAdobeBlocks);
 	public static final Item filled_adobe_capsule = new Item().setUnlocalizedName("filled_adobe_capsule").setCreativeTab(TabAdobeBlocks);
@@ -117,39 +141,6 @@ public class AdobeBlocks {
 	public void preInit(FMLPreInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
-		GameRegistry.register(adobe_slab.setRegistryName("adobe_slab"));
-		GameRegistry.register(new ItemBlockAdobeSlab(adobe_slab, adobe_slab, adobe_double_slab, false).setRegistryName("adobe_slab"));
-		GameRegistry.register(adobe_double_slab.setRegistryName("double_adobe_slab"));
-		GameRegistry.register(new ItemBlockAdobeSlab(adobe_double_slab, adobe_slab, adobe_double_slab, true).setRegistryName("double_adobe_slab"));
-		registerBlock(adobe_mixture_block);
-		registerBlock(adobe_tile);
-		registerBlock(adobe_bricks);
-		registerBlock(adobe_furnace);
-		registerBlock(lit_adobe_furnace);
-		registerBlock(adobe_wall);
-		registerBlock(adobe_stairs);
-		registerBlock(adobe_glass);
-		registerBlock(adobe_door_internal);
-		registerBlock(adobe_glass_pane);
-		registerBlock(oak_beam);
-		registerBlock(birch_beam);
-		registerBlock(spruce_beam);
-		registerBlock(jungle_beam);
-		registerBlock(dark_oak_beam);
-		registerBlock(acacia_beam);
-		registerBlock(adobe_block, new ItemAdobeBlock(adobe_block));
-		registerItem(adobe_mixture);
-		registerItem(adobe_brick);
-		registerItem(adobe_sword);
-		registerItem(adobe_pickaxe);
-		registerItem(adobe_axe);
-		registerItem(adobe_shovel);
-		registerItem(adobe_capsule);
-		registerItem(filled_adobe_capsule);
-		registerItem(stone_stick);
-		registerItem(adobe_door);
-		registerItem(throwing_stone);
-		registerItem(adobe_hoe);
 
 		OreDictionary.registerOre("stickStone", stone_stick);
 		OreDictionary.registerOre("rodStone", stone_stick);
@@ -165,6 +156,7 @@ public class AdobeBlocks {
 	public void init(FMLInitializationEvent event) {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
 		VanillaRecipes.initRecipes();
+		VanillaRecipes.generateConstants();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -231,17 +223,89 @@ public class AdobeBlocks {
 		ModelLoader.setCustomModelResourceLocation(filled_adobe_capsule, 0, new ModelResourceLocation(MODID + ":filled_adobe_capsule", "inventory"));
 	}
 
-	private void registerItem(Item item) {
-		GameRegistry.register(item.setRegistryName(item.getUnlocalizedName().substring(5)));
+	private static IForgeRegistry<Item> itemRegistry = null;
+	private static IForgeRegistry<Block> blockRegistry = null;
+	
+	public static void registerItems(Item item) {
+		itemRegistry.register(item.setRegistryName(item.getUnlocalizedName().substring(5)));
 	}
 
-	private void registerBlock(Block block) {
-		GameRegistry.register(block.setRegistryName(block.getUnlocalizedName().substring(5)));
-		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getUnlocalizedName().substring(5)));
+	public static void registerItemForBlock(Block block) {
+		itemRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
 	}
-
-	private void registerBlock(Block block, ItemBlock item) {
-		GameRegistry.register(block.setRegistryName(block.getUnlocalizedName().substring(5)));
-		GameRegistry.register(item.setRegistryName(block.getUnlocalizedName().substring(5)));
+	
+	
+	public static void registerBlock(Block block) {
+		blockRegistry.register(block.setRegistryName(block.getUnlocalizedName().substring(5)));
+	}
+	
+	public static void registerItemBlock(ItemBlock itemBlock) {
+		itemRegistry.register(itemBlock.setRegistryName(itemBlock.getBlock().getUnlocalizedName().substring(5)));
+	}
+	
+	@SubscribeEvent
+	public static void itemRegistry(RegistryEvent.Register<Item> event) {
+		itemRegistry = event.getRegistry();
+		
+		itemRegistry.register(new ItemBlockAdobeSlab(adobe_slab, adobe_slab, adobe_double_slab, false).setRegistryName("adobe_slab"));
+		itemRegistry.register(new ItemBlockAdobeSlab(adobe_double_slab, adobe_slab, adobe_double_slab, true).setRegistryName("double_adobe_slab"));
+		
+		registerItems(adobe_mixture);
+		registerItems(adobe_brick);
+		registerItems(adobe_sword);
+		registerItems(adobe_pickaxe);
+		registerItems(adobe_axe);
+		registerItems(adobe_shovel);
+		registerItems(adobe_capsule);
+		registerItems(filled_adobe_capsule);
+		registerItems(stone_stick);
+		registerItems(adobe_door);
+		registerItems(throwing_stone);
+		registerItems(adobe_hoe);
+		
+		registerItemForBlock(adobe_mixture_block);
+		registerItemForBlock(adobe_tile);
+		registerItemForBlock(adobe_bricks);
+		registerItemForBlock(adobe_furnace);
+		registerItemForBlock(lit_adobe_furnace);
+		registerItemForBlock(adobe_wall);
+		registerItemForBlock(adobe_stairs);
+		registerItemForBlock(adobe_glass);
+		registerItemForBlock(adobe_door_internal);
+		registerItemForBlock(adobe_glass_pane);
+		registerItemForBlock(oak_beam);
+		registerItemForBlock(birch_beam);
+		registerItemForBlock(spruce_beam);
+		registerItemForBlock(jungle_beam);
+		registerItemForBlock(dark_oak_beam);
+		registerItemForBlock(acacia_beam);
+		registerItemBlock(new ItemAdobeBlock(adobe_block));
+		
+	}
+	
+	@SubscribeEvent
+	public static void blockRegistry(RegistryEvent.Register<Block> event) {
+		blockRegistry = event.getRegistry();
+		
+		blockRegistry.register(adobe_slab.setRegistryName("adobe_slab"));
+		blockRegistry.register(adobe_double_slab.setRegistryName("double_adobe_slab"));
+		
+		registerBlock(adobe_mixture_block);
+		registerBlock(adobe_tile);
+		registerBlock(adobe_bricks);
+		registerBlock(adobe_furnace);
+		registerBlock(lit_adobe_furnace);
+		registerBlock(adobe_wall);
+		registerBlock(adobe_stairs);
+		registerBlock(adobe_glass);
+		registerBlock(adobe_door_internal);
+		registerBlock(adobe_glass_pane);
+		registerBlock(oak_beam);
+		registerBlock(birch_beam);
+		registerBlock(spruce_beam);
+		registerBlock(jungle_beam);
+		registerBlock(dark_oak_beam);
+		registerBlock(acacia_beam);
+		registerBlock(adobe_block);
 	}
 }

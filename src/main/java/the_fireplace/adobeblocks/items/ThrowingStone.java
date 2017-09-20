@@ -31,10 +31,10 @@ public class ThrowingStone extends Item {
 
 		if (!worldIn.isRemote) {
 			EntityThrowingStone stone = new EntityThrowingStone(worldIn, playerIn);
-			stone.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+			stone.setLocationAndAngles(playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
 			worldIn.spawnEntity(stone);
 		}
 
-		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
 	}
 }

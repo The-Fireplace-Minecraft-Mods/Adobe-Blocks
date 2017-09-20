@@ -2,7 +2,6 @@ package the_fireplace.adobeblocks.blocks;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,10 +19,10 @@ public class AdobeWall extends BlockWall {
 		setUnlocalizedName("adobe_wall");
 	}
 
+	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
-	{
-		list.add(new ItemStack(itemIn));
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> list) {
+		list.add(new ItemStack(AdobeBlocks.adobe_wall));
 	}
 }

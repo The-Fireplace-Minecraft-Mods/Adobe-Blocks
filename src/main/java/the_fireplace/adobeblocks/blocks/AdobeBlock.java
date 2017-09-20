@@ -42,23 +42,26 @@ public class AdobeBlock extends Block {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, STATE);
 	}
+	
+	
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list){
-		list.add(new ItemStack(item, 1, 0));
-		list.add(new ItemStack(item, 1, 1));
-		list.add(new ItemStack(item, 1, 2));
-		list.add(new ItemStack(item, 1, 3));
-		list.add(new ItemStack(item, 1, 4));
-		list.add(new ItemStack(item, 1, 5));
-		list.add(new ItemStack(item, 1, 6));
-		list.add(new ItemStack(item, 1, 7));
-		list.add(new ItemStack(item, 1, 8));
-		list.add(new ItemStack(item, 1, 9));
-		list.add(new ItemStack(item, 1, 10));
-		list.add(new ItemStack(item, 1, 11));
-		list.add(new ItemStack(item, 1, 12));
-		list.add(new ItemStack(item, 1, 13));
-		list.add(new ItemStack(item, 1, 14));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		Block adobe_block = AdobeBlocks.adobe_block;
+		list.add(new ItemStack(adobe_block, 1, 0));
+		list.add(new ItemStack(adobe_block, 1, 1));
+		list.add(new ItemStack(adobe_block, 1, 2));
+		list.add(new ItemStack(adobe_block, 1, 3));
+		list.add(new ItemStack(adobe_block, 1, 4));
+		list.add(new ItemStack(adobe_block, 1, 5));
+		list.add(new ItemStack(adobe_block, 1, 6));
+		list.add(new ItemStack(adobe_block, 1, 7));
+		list.add(new ItemStack(adobe_block, 1, 8));
+		list.add(new ItemStack(adobe_block, 1, 9));
+		list.add(new ItemStack(adobe_block, 1, 10));
+		list.add(new ItemStack(adobe_block, 1, 11));
+		list.add(new ItemStack(adobe_block, 1, 12));
+		list.add(new ItemStack(adobe_block, 1, 13));
+		list.add(new ItemStack(adobe_block, 1, 14));
 	}
 
 	private boolean canEasterEgg(){

@@ -9,7 +9,6 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("ObjectAllocationInLoop")
 public class ContainerAdobeFurnace extends Container {
 	private final IInventory tileFurnace;
 	private int field_178152_f;
@@ -53,19 +52,20 @@ public class ContainerAdobeFurnace extends Container {
 
 		for (IContainerListener crafter : this.listeners) {
 			if (this.field_178152_f != this.tileFurnace.getField(2)) {
-				crafter.sendProgressBarUpdate(this, 2, this.tileFurnace.getField(2));
+				crafter.sendWindowProperty(this, 2, this.tileFurnace.getField(2));
 			}
 
 			if (this.field_178154_h != this.tileFurnace.getField(0)) {
-				crafter.sendProgressBarUpdate(this, 0, this.tileFurnace.getField(0));
+				crafter.sendWindowProperty(this, 0, this.tileFurnace.getField(0));
 			}
 
 			if (this.field_178155_i != this.tileFurnace.getField(1)) {
-				crafter.sendProgressBarUpdate(this, 1, this.tileFurnace.getField(1));
+				crafter.sendWindowProperty(this, 1, this.tileFurnace.getField(1));
 			}
 
 			if (this.field_178153_g != this.tileFurnace.getField(3)) {
-				crafter.sendProgressBarUpdate(this, 3, this.tileFurnace.getField(3));
+				//sendProgressBarUpdate
+				crafter.sendWindowProperty(this, 3, this.tileFurnace.getField(3));
 			}
 		}
 
