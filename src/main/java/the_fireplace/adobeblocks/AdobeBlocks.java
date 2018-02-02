@@ -66,8 +66,10 @@ import the_fireplace.adobeblocks.items.ItemAdobeDoor;
 import the_fireplace.adobeblocks.items.ThrowingStone;
 import the_fireplace.adobeblocks.proxy.CommonProxy;
 
+import javax.annotation.Nonnull;
+
 @Mod.EventBusSubscriber
-@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://thefireplace.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.12]")
+@Mod(modid = AdobeBlocks.MODID, name = AdobeBlocks.MODNAME, updateJSON = "http://thefireplace.bitnamiapp.com/jsons/adobeblocks.json", acceptedMinecraftVersions = "[1.12,1.13)")
 public class AdobeBlocks {
 	@Instance(AdobeBlocks.MODID)
 	public static AdobeBlocks instance;
@@ -110,22 +112,22 @@ public class AdobeBlocks {
 		@Override
 		public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 			RayTraceResult movingobjectposition = this.rayTrace(worldIn, playerIn, true);
-			if (movingobjectposition == null) return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+			if (movingobjectposition == null) return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 			else {
 				if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
 					BlockPos blockpos = movingobjectposition.getBlockPos();
 					if (!worldIn.isBlockModifiable(playerIn, blockpos))
-						return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+						return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 					if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, playerIn.getHeldItem(hand)))
-						return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+						return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 					Material material = iblockstate.getMaterial();
 					if (material == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
-						return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule, playerIn.getHeldItem(hand).getCount()));
+						return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(filled_adobe_capsule, playerIn.getHeldItem(hand).getCount()));
 					}
 				}
 			}
-			return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
+			return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(hand));
 		}
 	}.setUnlocalizedName("adobe_capsule").setCreativeTab(TabAdobeBlocks);
 	public static final Item filled_adobe_capsule = new Item().setUnlocalizedName("filled_adobe_capsule").setCreativeTab(TabAdobeBlocks);
@@ -142,21 +144,18 @@ public class AdobeBlocks {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new AdobeBlocksGuiHandler());
 		GameRegistry.registerTileEntity(TileEntityAdobeFurnace.class, "adobe_furnace");
 
-		OreDictionary.registerOre("stickStone", stone_stick);
-		OreDictionary.registerOre("rodStone", stone_stick);
-
 		int eid = -1;
 		EntityRegistry.registerModEntity(new ResourceLocation("adobeblocks:adobe_thrown_stone"), EntityThrowingStone.class, "adobe_thrown_stone", ++eid, instance, 64, 10, true);
 		proxy.registerRenderers();
-		/*
-		if (event.getSide().isClient())
-			registerItemRenders();
-		*/
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(throwing_stone, new DispenseBehaviorThrowingStone());
+		GameRegistry.addSmelting(adobe_mixture, new ItemStack(adobe_brick), 0.3F);
+
+		OreDictionary.registerOre("stickStone", stone_stick);
+		OreDictionary.registerOre("rodStone", stone_stick);
 	}
 
 	@SideOnly(Side.CLIENT)

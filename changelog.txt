@@ -1,2 +1,2 @@
-Fixed the Adobe Furnace
-Updated to 1.11.2
+Fixed the missing smelting recipe of Adobe Mixture to Adobe Brick
+Fixed Adobe Throwing Stone not throwing

@@ -26,10 +26,10 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void register(IModRegistry registry) {
-		registry.getJeiHelpers().getItemBlacklist().addItemToBlacklist(new ItemStack(AdobeBlocks.adobe_block, 1, OreDictionary.WILDCARD_VALUE));
-		registry.getJeiHelpers().getItemBlacklist().addItemToBlacklist(new ItemStack(AdobeBlocks.lit_adobe_furnace));
-		registry.getJeiHelpers().getItemBlacklist().addItemToBlacklist(new ItemStack(AdobeBlocks.adobe_door_internal));
-		registry.getJeiHelpers().getItemBlacklist().addItemToBlacklist(new ItemStack(AdobeBlocks.adobe_double_slab));
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(AdobeBlocks.adobe_block, 1, OreDictionary.WILDCARD_VALUE));
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(AdobeBlocks.lit_adobe_furnace));
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(AdobeBlocks.adobe_door_internal));
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(AdobeBlocks.adobe_double_slab));
 	}
 
 	@Override

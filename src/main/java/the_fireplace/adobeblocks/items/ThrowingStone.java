@@ -23,15 +23,14 @@ public class ThrowingStone extends Item {
 	 */
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (!playerIn.capabilities.isCreativeMode) {
+		if (!playerIn.capabilities.isCreativeMode)
 			playerIn.getHeldItem(hand).shrink(1);
-		}
 
 		worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		if (!worldIn.isRemote) {
 			EntityThrowingStone stone = new EntityThrowingStone(worldIn, playerIn);
-			stone.setLocationAndAngles(playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+			stone.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
 			worldIn.spawnEntity(stone);
 		}
 
