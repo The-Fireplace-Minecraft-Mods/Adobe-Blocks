@@ -1,2 +1,2 @@
-Fixed the missing smelting recipe of Adobe Mixture to Adobe Brick
-Fixed Adobe Throwing Stone not throwing
+Generated en_UD.lang using https://github.com/The-Fireplace/MC-en-UD-Generator
+Updated mod link
